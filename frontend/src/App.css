@@ -2,4 +2,10 @@
   font-family: 'Manrope', sans-serif;
 }
 
+#app {
+  background-color: aliceblue;
+}
 
+.css-mxool3 {
+  border-inline-start: none !important;
+}

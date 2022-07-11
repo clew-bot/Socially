@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { Form, Select, Container } from "../../styled/signup.styled";
+import { Form, Select, Container, Centered } from "../../styled/signup.styled";
 import { useForm } from "../../hooks/useForm";
+import { format, compareAsc } from 'date-fns'
 import {
-  Input, Button
+  Input, Button, Divider,  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
 } from '@chakra-ui/react'
 
 const Signup = () => {
@@ -13,17 +18,20 @@ const Signup = () => {
     lastName: "",
     password: "",
     confirmPassword: "",
+    day:"",
     sAnswer: "",
   });
   const [gender, setGender] = useState([]);
   const [securityQuestion, setSecurityQuestion] = useState([]);
-  const handleSignUp = async (e) => {
-    console.log(securityQuestion);
-    console.log(gender);
-    console.log(securityQuestion);
 
+
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log(loading)
+    console.log(values)
+    console.log(values.year, values.month, values.day)
+    let birthday = format(new Date(values.year, values.day, values.month), 'MM/dd/yyyy')
+    console.log(birthday)
+
     setLoading(() => !loading)
     const data = await fetch("/api/auth", {
       method: "GET",
@@ -36,9 +44,9 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <Centered>
       <Form onSubmit={handleSignUp}>
-        <h1>Signup</h1>
+        <h1>Create Account</h1>
         <Container>
           <Input
             width="300px" 
@@ -65,39 +73,63 @@ const Signup = () => {
             placeholder="Confirm Password"
           ></Input>
         </Container>
-        <h3>I am a...</h3>
+        <Divider />
+
+        <Container>
         <Select
           onChange={(e) => {
             setGender(e.target.value);
           }}
+          width="100px"
         >
-          <option defaultValue="" disabled>
+          <option defaultValue disabled>
             Gender
           </option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </Select>
-        <Container>
-          <Select name="Month" onChange={handleChange}>
-            <option value="Janurary">Janurary</option>
-            <option value="February">February</option>
-            <option value="March">March</option>
-            <option value="April">April</option>
-            <option value="May">May</option>
-            <option value="June">June</option>
-            <option value="July">July</option>
-            <option value="August">August</option>
-            <option value="September">September</option>
-            <option value="November">November</option>
-            <option value="December">December</option>
+        <Divider orientation='vertical' />
+        <Select name="month" onChange={handleChange} width="100px">
+            <option value="01">Janurary</option>
+            <option value="02">February</option>
+            <option value="03">March</option>
+            <option value="04">April</option>
+            <option value="05">May</option>
+            <option value="06">June</option>
+            <option value="07">July</option>
+            <option value="08">August</option>
+            <option value="09">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
           </Select>
-          <Input type="text" placeholder="Day" onChange={handleChange}></Input>
-          <Input type="text" placeholder="Year" onChange={handleChange}></Input>
+          <NumberInput size="md" maxW={20} defaultValue={1} max={31} onChange={(value) => handleChange({ target: { name: 'day', value }})}>
+  <NumberInputField />
+  <NumberInputStepper >
+    <NumberIncrementStepper  />
+    <NumberDecrementStepper  />
+  </NumberInputStepper>
+</NumberInput>
+<NumberInput size="md" maxW={24} defaultValue={1995} max={2004} min={1904} onChange={(value) => handleChange({ target: { name: 'year', value }})}>
+  <NumberInputField onChange={handleChange} />
+  <NumberInputStepper >
+    <NumberIncrementStepper />
+    <NumberDecrementStepper />
+  </NumberInputStepper>
+</NumberInput>
+
         </Container>
-        <h2>Security Questions:</h2>
+
+        <Divider />
+        <br />
+        <h2 style={{paddingLeft: "11px"}}>Security Question:</h2>
+
+        <Container>
+         
+   
         <Select
           name="sQuestion"
-          id=""
+          width="500px"
           onChange={(e) => {
             setSecurityQuestion(e.target.value);
           }}
@@ -116,9 +148,14 @@ const Signup = () => {
           </option>
         </Select>
         <Input name="sAnswer" placeholder="Answer"></Input>
-        <Button type="submit" isLoading={loading} colorScheme='teal' variant='solid'>Signup</Button>
+       
+        </Container>
+        <br />
+        <Button size="md" type="submit" isLoading={loading} colorScheme='purple' 
+        variant='solid'>Signup</Button>
+
       </Form>
-    </>
+    </Centered>
   );
 };
 
