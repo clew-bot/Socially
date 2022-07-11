@@ -2,19 +2,22 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Header = styled.header`
-    border: solid 2px black;
-    margin-bottom: 10px;
     max-width: 1170px;
     margin: 0 auto;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
-
-    h1 {
-        transform: skewY(100px);
-    }
 `
 
 export const HeaderLink = styled(Link)`
     text-decoration: none;
+    margin-bottom: 10px;
+    max-width: 1170px;
+    margin: 0 auto;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: #7f5499;
+    h1 {
+        transform: skewY(100px);
+    }
 `
 
 export const Grid = styled.div`

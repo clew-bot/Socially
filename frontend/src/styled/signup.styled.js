@@ -86,3 +86,10 @@ export const Container = styled.div`
         padding-top: 40px;
     }
     `
+
+    export const Centered2 = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0%;
+    `
