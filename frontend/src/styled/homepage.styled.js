@@ -1,11 +1,20 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Header = styled.header`
     border: solid 2px black;
-    height: 50px;
     margin-bottom: 10px;
     max-width: 1170px;
     margin: 0 auto;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+
+    h1 {
+        transform: skewY(100px);
+    }
+`
+
+export const HeaderLink = styled(Link)`
+    text-decoration: none;
 `
 
 export const Grid = styled.div`

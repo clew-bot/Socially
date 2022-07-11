@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 const Home = () => {
   return (
     <>
-    <Header>Socially</Header>
+
     <Grid>
         <Displayer>Welcome to Socially!</Displayer>
         <Login>Login here!
