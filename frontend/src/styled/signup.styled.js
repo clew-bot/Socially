@@ -27,12 +27,12 @@ export const Form = styled.form`
     flex-direction: column;
     max-width: 1170px;
     margin: 0 auto;
-
-    width: 100%;
+    background-color: #b1b1b1;
+    max-width: 700px;
     height: 100%;
     padding: 10px;
-    background-color: #fff;
-    border-radius: 3px;
+    margin: 10px;
+    border-radius: 10px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     &:focus {
@@ -69,5 +69,9 @@ export const Select = styled.select`
 export const Container = styled.div`
     display: flex;
     justify-content :start;
-
+    input {
+        margin: 5px;
+        border: solid 2px #bfb8b8;
+        background: #eee;
+    }
     `
