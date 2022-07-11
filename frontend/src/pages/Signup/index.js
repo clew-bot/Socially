@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Input, Form, Select, Container } from "../../styled/signup.styled"
+import { useForm } from "../../hooks/useForm"
 
 
 const Signup = () => {
+  const [values, handleChange] = useForm({email: "", firstName: "", lastName: "", password: "", confirmPassword: "", sAnswer: ""});
   const handleSignUp = async (e) => {
+
     e.preventDefault()
     const data = await fetch("/api/auth", {
       method: "GET",
@@ -22,12 +25,15 @@ const Signup = () => {
     <Form onSubmit={handleSignUp}>
     <h1>Signup</h1>
     <Container>
-    <Input placeholder="First name"></Input>
-    <Input placeholder="Last name"></Input>
+    <Input onChange={handleChange} name="firstName" placeholder="First name"></Input>
+    <Input onChange={handleChange} name="lastName" placeholder="Last name"></Input>
     </Container>
     <Input width="100" placeholder="Email"></Input>
     <br/>
- 
+    <Container>
+    <Input name="password" type="password" placeholder="Password"></Input>
+    <Input name="confirmPassword" type="password" placeholder="Confirm Password"></Input>
+    </Container>
     <Select>
       <option value="" selected disabled>Gender</option>
         <option value="Male">
@@ -61,7 +67,7 @@ const Signup = () => {
       <option value="Pick a question" >What was your favorite childhood cartoon</option>
       <option value="Pick a question">What is your favorite food</option>
    </Select>
-   <Input placeholder="Answer"></Input>
+   <Input name="sAnswer" placeholder="Answer"></Input>
     <button >Signup</button>
     </Form>
     </>
