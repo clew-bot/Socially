@@ -8,7 +8,7 @@ const Home = () => {
 
     <Grid>
         <Displayer>Welcome to Socially!</Displayer>
-        <Login>Login here!
+        <Login>Login <Link to={"/login"}>Here!</Link>
             Don't have an account? Let's <Link to={"/signup"}>Sign up!</Link>
         </Login>
         <Footer>
