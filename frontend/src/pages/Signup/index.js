@@ -108,6 +108,7 @@ const Signup = () => {
   return (
     <Centered>
       <Form onSubmit={handleSignUp}>
+
         <FormControl>
           <h1>Create Account</h1>
           <Container>
@@ -293,6 +294,8 @@ const Signup = () => {
             </Button>
           </Centered2>
         </FormControl>
+        <div className="behind-bg">
+        </div>
       </Form>
     </Centered>
   );
