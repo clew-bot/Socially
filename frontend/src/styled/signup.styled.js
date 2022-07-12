@@ -4,7 +4,7 @@ export const Centered = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
+  height: 100vh;
 `;
 
 export const Form = styled.form`
@@ -16,7 +16,7 @@ export const Form = styled.form`
     );
     z-index: -1;
     position: absolute;
-    height: 388px;
+    height: 388px !important;
     width: 500px;
     border-radius: 10px;
     box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
@@ -30,6 +30,11 @@ export const Form = styled.form`
       width: 400px;
     }
   }
+  /* center with transform for me github copilot. lets go */
+
+  margin-bottom: 20rem !important;
+
+
 
   display: flex;
   flex-direction: column;
@@ -39,7 +44,6 @@ export const Form = styled.form`
   background-color: #ffc62a;
 
   max-width: 500px;
-  height: 100%;
   padding: 10px;
   margin: 10px;
   border-radius: 10px;
