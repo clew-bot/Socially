@@ -38,8 +38,8 @@ const Signup = () => {
     month: "01",
     sAnswer: "",
   });
-  const [gender, setGender] = useState([]);
-  const [securityQuestion, setSecurityQuestion] = useState([]);
+  const [gender, setGender] = useState("male");
+  const [securityQuestion, setSecurityQuestion] = useState("");
   const [show, setShow] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [error, setError] = useState(false);
@@ -93,14 +93,25 @@ const Signup = () => {
 
     let birthday = `${values.year}-${values.month}-${values.day}`;
     console.log(birthday);
+    console.log(gender)
 
+    console.log(values)
     setLoading(() => !loading);
     const data = await fetch("/api/auth", {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-    });
+      body: JSON.stringify({
+        email: values.email,
+        password: values.password,
+        fullName: values.fullName,
+        birthday: birthday,
+        sQuestion: securityQuestion,
+        sAnswer: values.sAnswer,
+        gender: gender
+    })
+  });
     const json = await data.json();
     console.log(json);
   };
@@ -174,9 +185,6 @@ const Signup = () => {
                 setGender(e.target.value);
               }}
             >
-              <option disabled defaultValue={true}>
-                Gender
-              </option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
             </Select>
@@ -275,7 +283,7 @@ const Signup = () => {
                 What is your favorite food
               </option>
             </Select>
-            <Input id="sAnswer" name="sAnswer" placeholder="Answer"></Input>
+            <Input onChange={handleChange} id="sAnswer" name="sAnswer" placeholder="Answer"></Input>
           </Container>
           <br />
           {/* {!isError ? (
