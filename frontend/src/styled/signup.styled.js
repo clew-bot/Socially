@@ -33,7 +33,7 @@ export const Form = styled.form`
     ;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     &:focus {
-        border-color: #ef0000;
+        border-color: #e6b925;
         outline: 0;
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
     }
@@ -58,7 +58,7 @@ export const Container = styled.div`
     }
 
     .error {
-        border: solid 2px red;
+        border: solid 2px #b34962;
         animation: shake 0.5s;
     } 
 
@@ -82,7 +82,7 @@ export const Container = styled.div`
   
         background: #eee;
         &:focus {
-            border-color: #b2b2b2;
+            border-color: #e6b925;
             outline: 0;
             box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
 
@@ -130,7 +130,7 @@ export const Container = styled.div`
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     &:focus {
-        border-color: #ef0000;
+        border-color: #e6b925;
         outline: 0;
         box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
     }
@@ -142,6 +142,56 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 0%;
+    button {
+        font-family: "Pacifico", cursive;
+        font-size: 1.5rem;
+        font-weight: lighter;
+        padding: 25px;
+        padding-top: 20px;
+        box-shadow:
+      0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075),
+      0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075),
+      0 16px 16px hsl(0deg 0% 0% / 0.075)
+    ;
+    &:focus {
+        transition: all 0.15s ease-in-out;
+        animation: downAndUp 0.5s forwards;
+        
+    }
+    }
+
+    @keyframes downAndUp {
+        
+        0% {
+            transform: translateY(0);
+            color: #a62b39;
+        }
+        30% {
+            transform: translateY(4px);
+            box-shadow: none;
+            color: #459970;
+        }
+        70% {
+
+            transform: translateY(-2px);
+            color: #615996;
+        }
+        100% {
+            transform: translateY(0);
+            box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+        0 2px 2px hsl(0deg 0% 0% / 0.075),
+        0 4px 4px hsl(0deg 0% 0% / 0.075),
+        0 8px 8px hsl(0deg 0% 0% / 0.075),
+        0 16px 16px hsl(0deg 0% 0% / 0.075)
+    ;
+    color: 
+#e6f263
+;
+        }
+    }
+
     `
 
     export const GenderContainer = styled.div`

@@ -9,7 +9,6 @@ import {
   BirthdayContainer,
 } from "../../styled/signup.styled";
 import { useForm } from "../../hooks/useForm";
-import { format, compareAsc } from "date-fns";
 import {
   Input,
   Button,
@@ -23,8 +22,6 @@ import {
   InputRightElement,
   InputGroup,
   Select,
-  FormLabel,
-  FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -33,56 +30,68 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [values, handleChange] = useForm({
     email: "",
-    firstName: "",
-    lastName: "",
+    fullName: "",
     password: "",
     confirmPassword: "",
-    day: "",
+    day: "1",
+    year: "1995",
+    month: "01",
     sAnswer: "",
   });
-  let isError = false;
   const [gender, setGender] = useState([]);
   const [securityQuestion, setSecurityQuestion] = useState([]);
   const [show, setShow] = useState(false);
   const [emailError, setEmailError] = useState("");
   const [error, setError] = useState(false);
   const [pwError, setPWError] = useState(false);
+  const [nameError, setNameError] = useState(false);
+  const [birthdayError, setBirthdayError] = useState(false);
 
   const handleClick = () => setShow(!show);
 
+  let isError = false;
+
   const validateEmail = (email) => {
     if (validator.isEmail(email)) {
-      console.log("aight");
-      isError = false;
       setEmailError("");
       setError(false);
+      return true;
     } else {
-      console.log("ffs kid");
-      isError = true;
-      console.log(isError);
-      setEmailError("This field is invalid");
-      setError(true);
+      return false;
     }
   };
   const handleSignUp = async (e) => {
+    console.log(values);
     setLoading(true);
     e.preventDefault();
-    validateEmail(values.email);
-    if (isError) {
-      setLoading(false);
-      return;
+    if (!validateEmail(values.email)) {
+      console.log("yo");
+      setEmailError("This field is invalid");
+      setError(true);
     }
-    if (values.password !== values.confirmPassword) {
+    if (
+      values.password !== values.confirmPassword ||
+      values.password.length === 0
+    ) {
       setPWError(true);
-      setLoading(false);
+      isError = true;
+      console.log(isError);
+    }
+    if (values.fullName === "") {
+      setNameError(true);
+      isError = true;
+    }
+    if (values.month === "month") {
+      setBirthdayError(true);
+      isError = true;
+    }
+    if (isError === true) {
+      console.log("yo");
+      setLoading(true);
       return;
     }
 
-    console.log(values);
-    let birthday = format(
-      new Date(values.year, values.day, values.month),
-      "MM/dd/yyyy"
-    );
+    let birthday = `${values.year}-${values.month}-${values.day}`;
     console.log(birthday);
 
     setLoading(() => !loading);
@@ -103,6 +112,8 @@ const Signup = () => {
           <h1>Create Account</h1>
           <Container>
             <Input
+              className={`${nameError ? "error" : ""}`}
+              id="firstName"
               width="300px"
               onChange={handleChange}
               name="fullName"
@@ -110,6 +121,7 @@ const Signup = () => {
             ></Input>
             <br />
             <Input
+              id="email"
               className={`${error ? "error" : ""}`}
               onChange={handleChange}
               name="email"
@@ -120,6 +132,7 @@ const Signup = () => {
           <Container>
             <InputGroup>
               <Input
+                id="pw"
                 onChange={handleChange}
                 name="password"
                 className={`${pwError ? "error" : ""}`}
@@ -134,6 +147,7 @@ const Signup = () => {
             </InputGroup>
             <InputGroup>
               <Input
+                id="confirmPw"
                 onChange={handleChange}
                 className={`${pwError ? "error" : ""}`}
                 name="confirmPassword"
@@ -151,9 +165,10 @@ const Signup = () => {
 
           <Container js="center" width="100px">
             <Select
-            width="110px"
-            icon={""}
-            className="gender-select"
+              id="gender-select"
+              width="110px"
+              icon={""}
+              className="gender-select"
               onChange={(e) => {
                 setGender(e.target.value);
               }}
@@ -173,15 +188,14 @@ const Signup = () => {
             </GenderContainer>
             <BirthdayContainer>
               <Select
-              icon={""}
+                icon={""}
+                id="month"
                 name="month"
                 onChange={handleChange}
                 marginLeft=".5rem"
                 width="120px"
               >
-                <option disabled selected>
-                  Month
-                </option>
+                <option disabled>Month</option>
                 <option value="01">January</option>
                 <option value="02">February</option>
                 <option value="03">March</option>
@@ -196,6 +210,7 @@ const Signup = () => {
                 <option value="12">December</option>
               </Select>
               <NumberInput
+                id="day"
                 marginLeft=".5rem"
                 size="md"
                 maxW={20}
@@ -212,6 +227,7 @@ const Signup = () => {
                 </NumberInputStepper>
               </NumberInput>
               <NumberInput
+                id="year"
                 marginLeft=".5rem"
                 size="md"
                 maxW={24}
@@ -237,7 +253,8 @@ const Signup = () => {
 
           <Container>
             <Select
-            paddingRight="10px"
+              id="sQuestion"
+              paddingRight="10px"
               name="sQuestion"
               width="500px"
               onChange={(e) => {
@@ -257,19 +274,18 @@ const Signup = () => {
                 What is your favorite food
               </option>
             </Select>
-            <Input name="sAnswer" placeholder="Answer"></Input>
+            <Input id="sAnswer" name="sAnswer" placeholder="Answer"></Input>
           </Container>
           <br />
-          {!isError ? (
+          {/* {!isError ? (
             <FormHelperText>{emailError}</FormHelperText>
           ) : (
             <FormHelperText>Required</FormHelperText>
-          )}
+          )} */}
           <Centered2>
             <Button
               size="md"
               type="submit"
-              isLoading={loading}
               colorScheme="purple"
               variant="solid"
             >
