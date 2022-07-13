@@ -30,7 +30,7 @@ const Signup = () => {
   const [loading, setLoading] = useState(false);
   const [values, handleChange] = useForm({
     email: "",
-    fullName: "",
+    username: "",
     password: "",
     confirmPassword: "",
     day: "1",
@@ -77,7 +77,7 @@ const Signup = () => {
       isError = true;
       console.log(isError);
     }
-    if (values.fullName === "") {
+    if (values.username === "") {
       setNameError(true);
       isError = true;
     }
@@ -105,7 +105,7 @@ const Signup = () => {
       body: JSON.stringify({
         email: values.email,
         password: values.password,
-        fullName: values.fullName,
+        username: values.username,
         birthday: birthday,
         sQuestion: securityQuestion,
         sAnswer: values.sAnswer,
@@ -128,7 +128,7 @@ const Signup = () => {
               id="firstName"
               width="300px"
               onChange={handleChange}
-              name="fullName"
+              name="username"
               placeholder="Name"
             ></Input>
             <br />

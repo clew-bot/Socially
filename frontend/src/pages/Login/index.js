@@ -15,7 +15,11 @@ import {
   InputGroup,
 } from "@chakra-ui/react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
+
 const Login = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [values, handleChange] = useForm({
     email: "",
@@ -45,7 +49,8 @@ const Login = () => {
         if (data.error) {
           setError(data.error);
         } else {
-          console.log("sure")
+          localStorage.setItem("yllaicos1", true);
+          navigate("/dashboard");
         }
       } catch (err) {
         console.log(err);
