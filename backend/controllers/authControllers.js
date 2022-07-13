@@ -48,20 +48,20 @@ module.exports = authControllers = {
         }
     },
 
-    check: async (req, res) => {
-      let string = req.session.user.id;
-      let id = string.toString();
-      if (id === req.body.id) {
-          res.json({
-            message: "User is logged in",
-            loggedIn: true,
-          });
-    } else {
+    check: async (req, res, next) => {
+      console.log(req.session)
+      if(!req.session.user) {
+        res.json({ message: "User is not logged in", loggedIn: false });
+      } else {
+       
+        res.json({ message: "User is logged in", loggedIn: true, id: req.session.user.id })
+        } 
+      },
+    
+    logout: async (req, res) => {
+      console.log("logout")
       req.session.destroy();
-      res.json({
-        message: "User is not logged in",
-        loggedIn: false,
-      });
+      console.log(req.session)
+      res.json({ message: "User has been logged out" });
     }
-}
 }

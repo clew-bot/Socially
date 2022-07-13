@@ -7,8 +7,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session) 
-
 const MAX_AGE = 1000 * 60 * 60 * 24 * 7;
+const router = require('express').Router();
+const requireAuth = require('./middleware/middleware');
 
 app.use(session({
   secret: 'secret',
@@ -29,11 +30,13 @@ app.use(cors());
 let options = {
     "useNewUrlParser": true
 }
-
 dotenv.config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api', routes);
+
+
+
 
 mongoose.connect(
     process.env.MONGO_URI,
