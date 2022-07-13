@@ -46,10 +46,12 @@ const Login = () => {
           body: JSON.stringify({ email, password }),
         });
         const data = await response.json();
-        if (data.error) {
+        if (data.loggedIn === false) {
           setError(data.error);
+          console.log(error)
         } else {
-          localStorage.setItem("yllaicos1", true);
+          
+          localStorage.setItem("yllaicos1", data.id);
           navigate("/dashboard");
         }
       } catch (err) {

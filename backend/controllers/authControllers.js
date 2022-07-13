@@ -13,28 +13,11 @@ module.exports = authControllers = {
           if (passwordMatch) {
             console.log("Match");
             const user = await db.User.findOne({ email: req.body.email });
-            const accessToken = jwt.sign(
-                {
-                    "UserInfo": {
-                        "username": user.username,
-                    }
-                },
-                process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '10s' }
-            );
-            const refreshToken = jwt.sign(
-                { "username": user.username },
-                process.env.REFRESH_TOKEN_SECRET,
-                { expiresIn: '1d' }
-            );
-                  // Saving refreshToken with current user
-        user.refreshToken = refreshToken;
-        // Creates Secure Cookie with refresh token
-        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-
-        // Send authorization roles and access token to user
-        res.json({ message: "Yay", accessToken });
+             const userSession = { id: user._id };
+             req.session.user = userSession;
+            res.json( {loggedIn : true, id: user._id} );
           } else {
+            
             res.json({ message: "Password is incorrect", loggedIn: false });
           }
         } else {
@@ -63,5 +46,25 @@ module.exports = authControllers = {
               userSession
             });
         }
+    },
+
+    check: async (req, res) => {
+      console.log("reqbody", req.body.id)
+      console.log(req.session.user.id);
+      let string = req.session.user.id;
+      let id = string.toString();
+      if (id === req.body.id) {
+        console.log("true");
+          res.json({
+            message: "User is logged in",
+            loggedIn: true,
+          });
+    } else {
+      req.session.destroy();
+      res.json({
+        message: "User is not logged in",
+        loggedIn: false,
+      });
     }
+}
 }
