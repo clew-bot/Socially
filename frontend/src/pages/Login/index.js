@@ -27,11 +27,9 @@ const Login = () => {
   });
   const [show, setShow] = useState(false);
   const [error, setError] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleClick = () => setShow(!show);
-
-  let isError = false;
-
 
   const handleSignUp = async (e) => {
       e.preventDefault();
@@ -46,8 +44,10 @@ const Login = () => {
           body: JSON.stringify({ email, password }),
         });
         const data = await response.json();
+        console.log(data)
         if (data.loggedIn === false) {
-          setError(data.error);
+          setError(data.message);
+          setShowError(true);
         } else {
           localStorage.setItem("yllaicos1", data.id);
           console.log("true")
@@ -98,11 +98,13 @@ const Login = () => {
               colorScheme="purple"
               variant="solid"
             >
+  
               Login
             </Button>
           </Centered2>
         </FormControl>
-        <div className="behind-bg">
+        <div className={`behind-bg ${showError ? "error-slide" : ""}`}>
+        <h2>{error}</h2>
         </div>
       </Form>
     </Centered>

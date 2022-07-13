@@ -8,6 +8,21 @@ export const Centered = styled.div`
 `;
 
 export const Form = styled.form`
+
+  .error-slide {
+    transform: translateY(100px);
+    transition: all 0.5s ease-in-out;
+    animation: moveDown 0.5s ease-in-out forwards !important;
+
+    h2 {
+      position: absolute;
+      bottom: 10%;
+      left: 18%;
+      font-size: 1rem;
+      font-weight: bolder;
+    }
+  }
+
   .behind-bg {
     background-image: linear-gradient(
       45deg,
@@ -43,13 +58,14 @@ export const Form = styled.form`
     }
 }
 
-    .funny-gif {
-        position: absolute;
-        top: 0;
-        border: solid 1px #ffc62a;
-        height: 100px;
-        width: 100px;
+@keyframes moveDown {
+    0% {
+        transform: translateY(0px);
     }
+    100% {
+        transform: translateY(50px);
+    }
+}
   }
 
   @media screen and (max-width: 600px) {
