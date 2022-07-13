@@ -48,9 +48,7 @@ const Login = () => {
         const data = await response.json();
         if (data.loggedIn === false) {
           setError(data.error);
-          console.log(error)
         } else {
-          
           localStorage.setItem("yllaicos1", data.id);
           navigate("/dashboard");
         }

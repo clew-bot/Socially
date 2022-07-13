@@ -49,12 +49,9 @@ module.exports = authControllers = {
     },
 
     check: async (req, res) => {
-      console.log("reqbody", req.body.id)
-      console.log(req.session.user.id);
       let string = req.session.user.id;
       let id = string.toString();
       if (id === req.body.id) {
-        console.log("true");
           res.json({
             message: "User is logged in",
             loggedIn: true,
