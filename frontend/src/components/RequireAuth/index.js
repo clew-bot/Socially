@@ -9,7 +9,7 @@ const RequireAuth = ({Component}) => {
     const ref = useRef(auth);
     console.log("ref", ref)
     const navigate = useNavigate();
-    useEffect(() => {
+
         console.log("yo")
       let id = localStorage.getItem('yllaicos1');
       if(id !== null) {
@@ -28,8 +28,6 @@ const RequireAuth = ({Component}) => {
       getAuth();
     }
 
-    }
-    , []);
   
     return ref.current ? <Component /> : <Navigate to="/login" />
 }

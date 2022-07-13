@@ -50,6 +50,7 @@ const Login = () => {
           setError(data.error);
         } else {
           localStorage.setItem("yllaicos1", data.id);
+          console.log("true")
           navigate("/dashboard");
         }
       } catch (err) {
