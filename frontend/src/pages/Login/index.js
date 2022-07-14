@@ -44,13 +44,11 @@ const Login = () => {
           body: JSON.stringify({ email, password }),
         });
         const data = await response.json();
-        console.log(data)
         if (data.loggedIn === false) {
           setError(data.message);
           setShowError(true);
         } else {
           localStorage.setItem("yllaicos1", data.id);
-          console.log("true")
           navigate("/dashboard");
         }
       } catch (err) {

@@ -59,6 +59,7 @@ export const Grid = styled.div`
     button {
       margin: 20px;
       opacity: 1 !important;
+      min-width: 6rem !important;
     }
   }
 `;

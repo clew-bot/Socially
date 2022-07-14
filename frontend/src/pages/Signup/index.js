@@ -61,11 +61,9 @@ const Signup = () => {
     }
   };
   const handleSignUp = async (e) => {
-    console.log(values);
     setLoading(true);
     e.preventDefault();
     if (!validateEmail(values.email)) {
-      console.log("yo");
       setEmailError("This field is invalid");
       setError(true);
     }
@@ -86,16 +84,11 @@ const Signup = () => {
       isError = true;
     }
     if (isError === true) {
-      console.log("yo");
       setLoading(true);
       return;
     }
 
     let birthday = `${values.year}-${values.month}-${values.day}`;
-    console.log(birthday);
-    console.log(gender)
-
-    console.log(values)
     setLoading(() => !loading);
     const data = await fetch("/api/auth", {
       method: "POST",
@@ -113,7 +106,7 @@ const Signup = () => {
     })
   });
     const json = await data.json();
-    console.log(json);
+    console.log("Response = ", json);
   };
 
   return (

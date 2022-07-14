@@ -3,13 +3,12 @@ import { Header, Grid, Displayer, Login, Footer, ButtonContainer, CenteredDiv } 
 import { Link } from "react-router-dom"
 import { Button } from '@chakra-ui/react'
 import MovingComponent from 'react-moving-text'
-import home1 from "../../assets/home/home1.jpg"
-import home2 from "../../assets/home/home2.jpg"
+// import home1 from "../../assets/home/home1.jpg"
+// import home2 from "../../assets/home/home2.jpg"
 import home3 from "../../assets/home/home3.jpg"
 
 
 const Home = () => {
-  const [done, setDone] = useState(false)
   const [text, setText] = useState('');
   const [key , setKey] = useState(0);
 
@@ -49,6 +48,7 @@ const Home = () => {
       const data = await response.json();
       localStorage.removeItem('yllaicos1');
       console.log(data);
+      alert("You have been logged out", data);
     } catch (err) {
       console.log(err);
     }
@@ -56,7 +56,7 @@ const Home = () => {
 
   return (
     <>
-
+    <button style={{position: "absolute", fontSize: "2rem", top: "0", right: "0", background: "white"}} onClick={handleLogout}>Log me out!</button>
     <Grid>
         <Displayer>
           <div className="welcome-container">
@@ -83,8 +83,8 @@ const Home = () => {
    <h2>What are you waiting for?</h2>
    <p>Meet people today! If you already have an account you can sign in to use Socially on the web</p>
    <ButtonContainer>
-<Button colorScheme={ "yellow" } marginRight="10px" borderRadius={"3px"} border={"solid 2px black"}><Link  to={"/login"}>Sign In</Link></Button>
-<Button colorScheme={ "yellow" } color={"black"} border={"solid 2px black"}borderRadius={"3px"}><Link to={"/signup"}>Join</Link></Button>
+   <Link  to={"/login"}><Button colorScheme={ "yellow" } marginRight="10px" borderRadius={"3px"} border={"solid 2px black"}>Sign In</Button></Link>
+   <Link to={"/signup"}><Button colorScheme={ "yellow" } color={"black"} border={"solid 2px black"}borderRadius={"3px"}>Join</Button></Link>
 </ButtonContainer>
   </div>
   </CenteredDiv>
