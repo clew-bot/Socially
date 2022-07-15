@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Header, Grid, Displayer, Login, Footer, ButtonContainer, CenteredDiv } from '../../styled/homepage.styled'
+import { Header, Grid, Displayer, Login, Footer, ButtonContainer, CenteredDiv, TestimonialContainer } from '../../styled/homepage.styled'
 import { Link } from "react-router-dom"
 import { Button, Center } from '@chakra-ui/react'
 import MovingComponent from 'react-moving-text'
-// import home1 from "../../assets/home/home1.jpg"
-// import home2 from "../../assets/home/home2.jpg"
-import home3 from "../../assets/home/home3.jpg"
+import teamUp from "../../assets/home/teamUp.svg"
+import coffeeFriends from "../../assets/home/coffeeFriends.svg"
+import people from "../../assets/home/people.svg"
 
 
 const Home = () => {
@@ -93,9 +93,47 @@ const Home = () => {
 
   </CenteredDiv>
         </Displayer>
-  
+          <TestimonialContainer>
+    
+            <div class="box-1">
+              <img src={teamUp} alt="" />
+              <p>Find</p>
+            </div>
+            <div class="box-1">
+              <img src={coffeeFriends} alt="" />
+              <p>Connect</p>
+            </div>
+            <div class="box-1">
+             <img src={people} alt="" />
+             <p>Make Friends</p>
+            </div>
+            <div className="test-bg ">
+            <h1 className="glad-text">
+              </h1>
+            </div>
+          </TestimonialContainer>
         <Footer>
-            Hellosss
+            © Socially 2022
+            <div className="footer-links">
+              <h2>
+                FAQ's
+              </h2>
+              <h2>
+                Careers
+              </h2>
+              <h2>
+                About Me
+              </h2>
+              <h2>
+                Code
+              </h2>
+              <h2>
+                Privacy Policy
+              </h2>
+              <h2>
+                Contact Me
+              </h2>
+            </div>
         </Footer>
     </Grid>
     </>

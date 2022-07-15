@@ -10,9 +10,11 @@ const Dashboard = () => {
   return (
     <Grid>
       <FriendsTab>
-        My Friends
+        Welcome back, 
         </FriendsTab>
         <Displayer>
+
+          <h2>What's happening?</h2>
           <ChatContainer>
           </ChatContainer>
         </Displayer>

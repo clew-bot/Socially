@@ -23,6 +23,12 @@ export const Displayer = styled.div`
   grid-area: Displayer;
   height: 100vh;
   background: aliceblue;
+
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+  }
 `
 
 

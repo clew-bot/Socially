@@ -8,8 +8,10 @@ const cors = require('cors');
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session) 
 const MAX_AGE = 1000 * 60 * 60 * 24 * 7;
-const router = require('express').Router();
-const requireAuth = require('./middleware/middleware');
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
 app.use(session({
   secret: 'secret',
@@ -36,6 +38,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', routes);
 
 
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
 
 
 mongoose.connect(
