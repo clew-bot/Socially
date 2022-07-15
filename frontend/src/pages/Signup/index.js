@@ -108,7 +108,6 @@ const Signup = () => {
     const json = await data.json();
     console.log("Response = ", json);
   };
-
   return (
     <Centered>
       <Form onSubmit={handleSignUp}>

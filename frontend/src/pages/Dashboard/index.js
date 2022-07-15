@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
-import { Container } from '../../styled/dashboard.styled';
+import { Container, Grid, Displayer, FriendsTab } from '../../styled/dashboard.styled';
 import { useNavigate } from 'react-router-dom';
-
+import ChatContainer from '../../components/ChatContainer';
 const Dashboard = () => {
 
 
 
 
   return (
-    <Container><h1>Yo</h1></Container>
+    <Grid>
+      <FriendsTab>
+        My Friends
+        </FriendsTab>
+        <Displayer>
+          <ChatContainer>
+          </ChatContainer>
+        </Displayer>
+    </Grid>
   )
 }
 

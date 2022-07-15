@@ -1,9 +1,14 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+// import home3 from "../assets/home/home3.jpg";
 
 export const Header = styled.header`
   max-width: 1170px;
   margin: 0 auto;
+  background: #ECC94B;
+  padding: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 `;
 
 export const HeaderLink = styled(Link)`
@@ -18,6 +23,7 @@ export const HeaderLink = styled(Link)`
   h1 {
     transform: skewY(100px);
   }
+
 `;
 
 export const Grid = styled.div`
@@ -39,7 +45,6 @@ export const Grid = styled.div`
     font-weight: bold;
     color: aliceblue;
     letter-spacing: -5px;
-    margin-top: 6rem;
   }
 
   .login-box {
@@ -48,11 +53,35 @@ export const Grid = styled.div`
     max-width: 800px;
     padding: 1.5rem;
     margin-top: 10rem;
+    background: #9F7AEA;
+    background-size: cover;
+    object-fit: cover !important;
+    position: relative;
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    @media screen and (max-width: 600px) {
+      margin-top: 5rem;
+    }
 
     h2 {
-      font-size: 1.4rem;
+      font-size: 2rem;
+      margin: 10px;
+      font-weight: bold;
+      font-style: italic;
+      letter-spacing: -2.4px;
       text-align: center;
-      color: black !important;
+      color: aliceblue !important;
+      background:#B794F4;
+      border-radius: 4px;
+    }
+
+    p{
+      font-size: 1.1rem;
+      text-align: center;
+      color: aliceblue !important;
+      margin-top: 25px;
+
     }
     
 
@@ -75,10 +104,29 @@ export const Displayer = styled.div`
   }
 
   .welcome-container {
+    position: relative;
     display: flex;
-    justify-content: start;
+    justify-content: start !important;
     align-items: center;
+    width: 560px;
+    background: #9F7AEA;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    margin-top: 6rem;
+    @media screen and (max-width: 600px) {
+    margin-left: 0px !important;
+    h1{
+      font-size: 3rem;
+      background: black;
+    }
+  
   }
+  }
+
+
 `;
 export const Login = styled.div`
   background-color: #f5f5f5;
@@ -113,4 +161,51 @@ export const CenteredDiv = styled.div`
     top: 3.8rem;
     border-radius: 5px;
   }
+
+  .login-bg {
+    background: #F6E05E !important;
+    height: 270px;
+    width: 830px;
+    position: absolute;
+    top: -18px;
+    left: -18px;
+    z-index: -1;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-radius: 5px;
+    transform: rotate(4deg);
+    /* animation: tiltLeft 5s ease-in-out infinite; */
+  }
+  .welcome-bg {
+    background: #F6E05E !important;
+    height: 200px;
+    width: 582px;
+    position: absolute;
+    top: -22px;
+    left: -10px;
+    z-index: -1;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    border-radius: 5px;
+    transform: rotate(-2deg);
+  }
+
+  @keyframes tiltLeft {
+    0% {
+        transform: rotate(0deg);
+
+    }
+    30% {
+        transform: rotate(2deg);
+    }
+    60% {
+        transform: rotate(-2deg);
+    }
+    80% {
+        transform: rotate(2deg) translate(0px);;
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
 `;

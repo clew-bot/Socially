@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Header, Grid, Displayer, Login, Footer, ButtonContainer, CenteredDiv } from '../../styled/homepage.styled'
 import { Link } from "react-router-dom"
-import { Button } from '@chakra-ui/react'
+import { Button, Center } from '@chakra-ui/react'
 import MovingComponent from 'react-moving-text'
 // import home1 from "../../assets/home/home1.jpg"
 // import home2 from "../../assets/home/home2.jpg"
@@ -18,7 +18,7 @@ const Home = () => {
       setText("friends");
       setTimeout(() => {
         setKey(() => key + 1);
-        setText("peers")
+        setText("enemies")
       }
         , 1500)
       setTimeout(() => {
@@ -28,14 +28,14 @@ const Home = () => {
           , 3000)
       setTimeout(() => {
             setKey(() => key + 3);
-            setText("lovers")
+            setText("buddies")
           }
             , 4500)
       setTimeout(() => {
               setKey(() => key + 4);
-              setText("everyone")
+              setText("everyone ")
             }
-              , 6500)
+              , 6000)
 
     }
     handleTimeout()
@@ -56,9 +56,11 @@ const Home = () => {
 
   return (
     <>
-    <button style={{position: "absolute", fontSize: "2rem", top: "0", right: "0", background: "white"}} onClick={handleLogout}>Log me out!</button>
+    {/* <button style={{position: "absolute", fontSize: "2rem", top: "0", right: "0", background: "white"}} onClick={handleLogout}>Log me out!</button> */}
+
     <Grid>
         <Displayer>
+          <CenteredDiv>
           <div className="welcome-container">
         <h1>Meet</h1>
         <MovingComponent
@@ -72,13 +74,13 @@ const Home = () => {
             key={key}
             className="mover-text"
             >
-            
   <h1>&nbsp;&nbsp;{text}</h1>
 
 </MovingComponent>
+<div className="welcome-bg"></div>
 </div>
+</CenteredDiv>
 <CenteredDiv>
-<img src={home3} alt="" className="main-home1" />
 <div className="login-box">
    <h2>What are you waiting for?</h2>
    <p>Meet people today! If you already have an account you can sign in to use Socially on the web</p>
@@ -86,7 +88,9 @@ const Home = () => {
    <Link  to={"/login"}><Button colorScheme={ "yellow" } marginRight="10px" borderRadius={"3px"} border={"solid 2px black"}>Sign In</Button></Link>
    <Link to={"/signup"}><Button colorScheme={ "yellow" } color={"black"} border={"solid 2px black"}borderRadius={"3px"}>Join</Button></Link>
 </ButtonContainer>
+<div className="login-bg"></div>
   </div>
+
   </CenteredDiv>
         </Displayer>
   
