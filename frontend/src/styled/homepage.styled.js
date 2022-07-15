@@ -180,6 +180,7 @@ export const TestimonialContainer = styled.div`
   border-radius: 10px;
   grid-area: Testimonial;
   gap: 5px;
+  height: 543px;
   margin-top: 20%;
   position: relative;
   @media screen and (max-width: 600px) {
@@ -187,6 +188,7 @@ export const TestimonialContainer = styled.div`
       padding: 2.5rem;
       margin: 2.5rem;
       grid-row: 2;
+      height: 100%;
     }
 
 
@@ -211,7 +213,7 @@ export const TestimonialContainer = styled.div`
     background: #FEFCBF;
     border-radius: 50px;
     padding: 1.3rem;
-    margin-top: 40px;
+    margin-top: 0px;
     height:465px;
     box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
       0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
