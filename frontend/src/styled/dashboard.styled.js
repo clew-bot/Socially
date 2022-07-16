@@ -22,6 +22,7 @@ grid-template-areas:
 export const Displayer = styled.div`
   grid-area: Displayer;
   background: #CBD5E0;
+  z-index: 2;
   margin-top: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;

@@ -19,6 +19,7 @@ export const InnerContainer = styled.div`
     .input-container {
         margin-bottom: 10px;
         border: solid 1px black;
+        background: #EDF2F7;
         &:hover {
             border: solid 1px black;
         }

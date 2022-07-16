@@ -35,15 +35,41 @@ export const TopDiv = styled.div`
 export const Container = styled.div`
     max-width: 600px;
     margin: 0 auto;
-    border: solid 1px black;
-    border-radius: 5px;
+    border-radius: 10px;
+    border: solid 1.3px #B794F4;
+
+    /* border-radius: 10px; */
     padding: 12px;
-    margin-top: 1rem;
+    margin-top: 2.5rem;
+    background: #EDF2F7;
+    position: relative;
+    /* z-index: 2 !important; */
+    /* box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075); */
+      hr{
+        border: solid .5px #B794F4;
+      }
+
+    .status-bg {
+    /* border: solid 1px black; */
+        position: absolute;
+        height: 100%;
+        min-width: 602px;
+        background: #805AD5;
+        top: 15px;
+        left: 11px;
+        z-index: -1 !important;
+        border-radius: 6px;
+        box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
+      0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
+      0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    }
 `
 
 export const TextContainer = styled.div`
         margin-top: 10px;
-        
+        z-index: 4;
         p{
             font-family: "Arial" serif;
         }

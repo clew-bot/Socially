@@ -6,7 +6,7 @@ import {IoEllipsisHorizontalCircleSharp} from 'react-icons/io5'
 const ChatLog = () => {
   const [showMore, setShowMore] = useState(false);
 
-  let text = `Hello world! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dignissimos, rem id fugit ex minus voluptatibus pariatur magni ipsam, modi cum quis aut natus, omnis commodi quos iure soluta autem optio! Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi repellat doloribus vero dicta neque, ut suscipit excepturi quisquam debitis ab necessitatibus vel quos dignissimos sit impedit reiciendis. Similique, ut doloribus? Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam pariatur impedit excepturi ea laudantium quas commodi nesciunt, suscipit ratione, mollitia quaerat velit, officia eaque dolor sed nobis nam illo dolore.`
+  let text = `Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem `
   return (
     <Container>
     <TopDiv>
@@ -35,6 +35,7 @@ const ChatLog = () => {
      <p>{showMore ? text : `${text.substring(0, 250)}`}</p>
      <Button className="show-more" bg={""} onClick={() => setShowMore(!showMore)}>See more</Button>
    </TextContainer>
+   <div className="status-bg"></div>
     </Container>
   )
 }
