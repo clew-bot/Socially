@@ -13,6 +13,13 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
 
+  .icons-section {
+    display: flex;
+    align-items: space-between;
+    justify-content: center;
+    margin-right: 10px;
+
+  }
 
 `;
 
