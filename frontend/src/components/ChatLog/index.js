@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Avatar, AvatarBadge, AvatarGroup, Button } from '@chakra-ui/react'
+import { Avatar, AvatarBadge, AvatarGroup, Button, Divider } from '@chakra-ui/react'
 import { TopDiv, Container, TextContainer } from "./chatlog.styled";
 import {IoEllipsisHorizontalCircleSharp} from 'react-icons/io5'
 
@@ -29,6 +29,7 @@ const ChatLog = () => {
         <IoEllipsisHorizontalCircleSharp size={"2.4rem"}/>
       </div>
     </TopDiv>
+    <Divider/>
     <TextContainer className="text-container">
      
      <p>{showMore ? text : `${text.substring(0, 250)}`}</p>

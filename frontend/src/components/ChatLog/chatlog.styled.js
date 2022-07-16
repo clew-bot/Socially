@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const TopDiv = styled.div`
     padding-bottom: 10px;
-    background: aliceblue;
     display: flex;
     justify-content: space-between;
     border-radius: 10px;
@@ -36,11 +35,16 @@ export const TopDiv = styled.div`
 export const Container = styled.div`
     max-width: 600px;
     margin: 0 auto;
-    border: solid 2px #5c6263;
+    border: solid 1px black;
     border-radius: 5px;
     padding: 12px;
+    margin-top: 1rem;
 `
 
 export const TextContainer = styled.div`
-
+        margin-top: 10px;
+        
+        p{
+            font-family: "Arial" serif;
+        }
 `

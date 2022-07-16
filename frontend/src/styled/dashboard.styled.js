@@ -21,8 +21,10 @@ grid-template-areas:
 
 export const Displayer = styled.div`
   grid-area: Displayer;
-  height: 100vh;
-  background: aliceblue;
+  background: #CBD5E0;
+  margin-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
   h2 {
     text-align: center;
@@ -34,8 +36,9 @@ export const Displayer = styled.div`
 
 export const FriendsTab = styled.div`
   grid-area: Friends;
-  background-color: #7f5499;
-  height: 100vh;
-  background: hotpink;
+  background: #CBD5E0;
+  margin-top: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   `
 
