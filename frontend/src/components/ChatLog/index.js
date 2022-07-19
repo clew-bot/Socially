@@ -14,7 +14,6 @@ const ChatLog = () => {
         <AvatarGroup className="avatar-block">
           <Avatar
             bg='orange.500' 
-            src="https://bit.ly/2XyqQZr"
             size="md"
             mr={2}
              />

@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import { Header, HeaderLink } from "./styled/homepage.styled";
 import GlobalHeader from "./components/GlobalHeader";
 import RequireAuth from './components/RequireAuth';
+import Profile from "./pages/Profile"
 function App() {
   return (
 <>
@@ -18,6 +19,7 @@ function App() {
       <Route path="/" element={<Home/>} />
       <Route path="/signup" element={<Signup/>} />
       <Route path="/login" element={<Login/>} />
+      <Route path="/profile/:id" element={<Profile/>} />
       <Route path="/dashboard" element={<RequireAuth Component={Dashboard}/>} />
 
     </Routes>

@@ -15,7 +15,7 @@ module.exports = authControllers = {
             const user = await db.User.findOne({ email: req.body.email });
              const userSession = { id: user._id };
              req.session.user = userSession;
-            res.json( {loggedIn : true, id: user._id} );
+            res.json( {message: "Yee", loggedIn : true, id: user._id, birthday: user.birthday, gender: user.gender, lastLogged: user.lastLogin, username: user.username} );
           } else {
             
             res.json({ message: "Password is incorrect", loggedIn: false });
