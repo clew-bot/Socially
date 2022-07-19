@@ -53,7 +53,6 @@ module.exports = authControllers = {
       if(!req.session.user) {
         res.json({ message: "User is not logged in", loggedIn: false });
       } else {
-       
         res.json({ message: "User is logged in", loggedIn: true, id: req.session.user.id })
         } 
       },

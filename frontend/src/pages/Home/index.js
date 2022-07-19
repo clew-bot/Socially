@@ -98,15 +98,15 @@ const Home = () => {
           </CenteredDiv>
         </Displayer>
         <TestimonialContainer>
-          <div class="box-1">
+          <div className="box-1">
             <img src={teamUp} alt="" />
             <p>Find</p>
           </div>
-          <div class="box-1">
+          <div className="box-1">
             <img src={coffeeFriends} alt="" />
             <p>Connect</p>
           </div>
-          <div class="box-1">
+          <div className="box-1">
             <img src={people} alt="" />
             <p>Make Friends</p>
           </div>

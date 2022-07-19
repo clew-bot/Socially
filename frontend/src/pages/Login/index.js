@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import validator from "validator";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/authSlice";
 import {
   Form,
   Container,
@@ -19,6 +21,10 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+  const { user, errorMessage, isError, message } = useSelector(
+    (state) => state.auth,
+  );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [values, handleChange] = useForm({
@@ -29,29 +35,21 @@ const Login = () => {
   const [error, setError] = useState(false);
   const [showError, setShowError] = useState(false);
 
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  },[user]);
+
   const handleClick = () => setShow(!show);
 
-  const handleSignUp = async (e) => {
+  const handleLogin = async (e) => {
       e.preventDefault();
       setLoading(true);
       const { email, password } = values;
+      let vals = { email, password};
       try {
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-        const data = await response.json();
-        console.log("that data ", data)
-        if (data.loggedIn === false) {
-          setError(data.message);
-          setShowError(true);
-        } else {
-          localStorage.setItem("yllaicos1", JSON.stringify(data));
-          navigate("/dashboard");
-        }
+        dispatch(login(vals));
       } catch (err) {
         console.log(err);
       }
@@ -60,7 +58,7 @@ const Login = () => {
 
   return (
     <Centered>
-      <Form onSubmit={handleSignUp}>
+      <Form onSubmit={handleLogin}>
 
         <FormControl>
           <h1>Welcome Back!</h1>
@@ -102,8 +100,8 @@ const Login = () => {
             </Button>
           </Centered2>
         </FormControl>
-        <div className={`behind-bg ${showError ? "error-slide" : ""}`}>
-        <h2>{error}</h2>
+        <div className={`behind-bg ${isError ? "error-slide" : ""}`}>
+        <h2>{errorMessage}</h2>
         </div>
       </Form>
     </Centered>
