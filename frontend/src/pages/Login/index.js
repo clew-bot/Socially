@@ -21,7 +21,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
-  const { user, errorMessage, isError, message } = useSelector(
+  const { user, errorMessage, isError, loggedIn } = useSelector(
     (state) => state.auth,
   );
   const dispatch = useDispatch();
@@ -36,10 +36,10 @@ const Login = () => {
   const [showError, setShowError] = useState(false);
 
   useEffect(() => {
-    if (user) {
+    if (user || loggedIn) {
       navigate("/dashboard");
     }
-  },[user]);
+  },[user, loggedIn]);
 
   const handleClick = () => setShow(!show);
 
@@ -47,7 +47,7 @@ const Login = () => {
       e.preventDefault();
       setLoading(true);
       const { email, password } = values;
-      let vals = { email, password};
+      let vals = { email, password };
       try {
         dispatch(login(vals));
       } catch (err) {

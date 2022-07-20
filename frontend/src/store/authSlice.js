@@ -19,7 +19,6 @@ export const login = createAsyncThunk(
         console.log(data)
         if (data.loggedIn === false) {
             console.log("error", data.message)
-            // SET isError to true!
             return thunkAPI.rejectWithValue(data.message);
         } else {
         localStorage.setItem("yllaicos1", JSON.stringify(data));
@@ -35,7 +34,6 @@ export const logout = createAsyncThunk(
             const response = await fetch('/api/auth/logout');
             const data = await response.json();
             localStorage.removeItem('yllaicos1');
-            // setLogged(false);
             console.log(data);
             alert("You have been logged out", data);
           } catch (err) {
@@ -66,6 +64,9 @@ const authSlice = createSlice({
         [login.rejected]: (state, action)=> {
             state.errorMessage = action.payload;
             state.isError = true;
+        },
+        [login.fulfilled]: (state, action)=> {
+            state.loggedIn = true;
         }
     }
 });
