@@ -43,16 +43,11 @@ export const Container = styled.div`
     margin-top: 2.5rem;
     background: #EDF2F7;
     position: relative;
-    /* z-index: 2 !important; */
-    /* box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
-      0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
-      0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075); */
       hr{
         border: solid .5px #B794F4;
       }
 
     .status-bg {
-    /* border: solid 1px black; */
         position: absolute;
         height: 100%;
         min-width: 602px;
@@ -64,6 +59,13 @@ export const Container = styled.div`
         box-shadow: 0 1px 1px hsl(0deg 0% 0% / 0.075),
       0 2px 2px hsl(0deg 0% 0% / 0.075), 0 4px 4px hsl(0deg 0% 0% / 0.075),
       0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
+    }
+
+    @media screen and (max-width: 600px) {
+        .status-bg {
+            width: 95%;
+
+        }
     }
 `
 
