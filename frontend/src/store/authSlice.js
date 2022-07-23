@@ -25,7 +25,7 @@ export const login = createAsyncThunk(
             
         }
     }
-)
+);
 
 export const logout = createAsyncThunk(
     'auth/logout',
@@ -34,8 +34,10 @@ export const logout = createAsyncThunk(
             const response = await fetch('/api/auth/logout');
             const data = await response.json();
             localStorage.removeItem('yllaicos1');
+
             console.log(data);
-            alert("You have been logged out", data);
+            alert("you have been logged out!");
+            return thunkAPI.fulfillWithValue(data);
           } catch (err) {
             console.log(err);
           }
@@ -50,15 +52,9 @@ const authSlice = createSlice({
         user: user ? user : null,
         errorMessage: null,
         isError: false,
+        loggedOut: false
     },
     reducers: {
-        // login(state, action) {
-        //     console.log("hi")
-        // },
-        // logout(state, action) {
-        //     console.log("hi")
-
-        // }
     },
     extraReducers: {
         [login.rejected]: (state, action)=> {
@@ -67,6 +63,11 @@ const authSlice = createSlice({
         },
         [login.fulfilled]: (state, action)=> {
             state.loggedIn = true;
+        },
+        //Logouts the user
+        [logout.fulfilled]: (state, action) => {
+            state.loggedIn = false;
+            state.loggedOut = true;
         }
     }
 });
