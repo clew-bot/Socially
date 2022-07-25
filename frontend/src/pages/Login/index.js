@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import validator from "validator";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/authSlice";
@@ -35,7 +35,7 @@ const Login = () => {
   const [error, setError] = useState(false);
   const [showError, setShowError] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (user || loggedIn) {
       navigate("/dashboard");
     }

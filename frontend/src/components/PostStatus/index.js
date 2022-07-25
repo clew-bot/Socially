@@ -21,8 +21,16 @@ const PostStatus = () => {
     setStatus(() => e.target.value);
   }
 
-  const handleSubmit = (e) => {}
-
+  const handleSubmit = async () => {
+    console.log(status);
+    const response = await fetch('/api/feed', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    console.log("response", response)
+  }
 
   return (
     <Container>
@@ -36,23 +44,10 @@ const PostStatus = () => {
                       <div className={emojiPicker ? "open-emoji" : "close-emoji"}>
                     <Picker pickerStyle={{ width: '100%', opacity: "1", transition: "all" }} onEmojiClick={onEmojiClick} />
                     </div>
-                    {/* {emojiPicker ? (
-                        <Picker pickerStyle={{ width: '80%', opacity: "1", transition: "all" }} onEmojiClick={onEmojiClick} />
-                    ) : (
-                      <div style={{width: "80%", opacity: "0", transition: "all" }}>fdsfds</div>)} */}
-                    {/* <Picker onEmojiClick={onEmojiClick} pickerStyle={{ width: '80%' }} /> */}
                     <FaSmileWink className="wink-emoji" size={"1.4rem"} onClick={openEmojiPicker}/>
-               
-                    {/* <FaSmileBeam className="wink-emoji" size={"1.4rem"} onClick={openEmojiPicker}/> */}
-                    <Button className="post-button" bg={"#3182CE"}     _focus={{ color: "inherit" }} _hover={{ bg: "teal.600" }}>Post</Button>
+                    <Button onClick={handleSubmit} className="post-button" bg={"#3182CE"}     _focus={{ color: "inherit" }} _hover={{ bg: "teal.600" }}>Post</Button>
                     </Box>
                     <div>
-      {/* {chosenEmoji ? (
-        <span>You chose: {chosenEmoji.emoji}</span>
-      ) : (
-        <span>No emoji Chosen</span>
-      )} */}
-
                  </div>
              </div>
         </InnerContainer>

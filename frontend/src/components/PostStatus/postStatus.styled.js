@@ -8,6 +8,10 @@ export const Container = styled.div`
 export const InnerContainer = styled.div`
     display: flex;
     flex-direction: column;
+    background: aliceblue;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 10px;
 
     h1 {
         text-align: left;

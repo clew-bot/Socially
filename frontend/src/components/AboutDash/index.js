@@ -1,9 +1,16 @@
 import React from 'react'
-
+import { Wrapper } from './aboutDash.styled'
 
 const AboutDash = ({ name }) => {
+
+
+
   return (
-    <div>Welcome Back {name}</div>
+    <Wrapper>
+      <div>Welcome Back {name}</div>
+      <div>You have no new messages</div>
+      <button >Testing</button>
+      </Wrapper>
   )
 }
 
