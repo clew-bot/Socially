@@ -1,64 +1,56 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/authSlice";
-import {
-  Form,
-  Container,
-  Centered,
-  Centered2,
-} from "../../styled/login.styled";
-import { useForm } from "../../hooks/useForm";
+import React, { useState, useEffect, useLayoutEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { login } from "../../store/authSlice"
+import { Form, Container, Centered, Centered2 } from "../../styled/login.styled"
+import { useForm } from "../../hooks/useForm"
 import {
   Input,
   Button,
   FormControl,
   InputRightElement,
   InputGroup,
-} from "@chakra-ui/react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-
+} from "@chakra-ui/react"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { useNavigate } from "react-router-dom"
+import { authSelector } from "../../store/authSlice"
 
 const Login = () => {
-  const { user, errorMessage, isError, loggedIn } = useSelector(
-    (state) => state.auth,
-  );
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const auth = useSelector(authSelector)
+  const { user, errorMessage, isError, loggedIn } = auth
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const [loading, setLoading] = useState(false)
   const [values, handleChange] = useForm({
     email: "",
     password: "",
-  });
-  const [show, setShow] = useState(false);
-  const [error, setError] = useState(false);
-  const [showError, setShowError] = useState(false);
+  })
+  const [show, setShow] = useState(false)
+  const [error, setError] = useState(false)
+  const [showError, setShowError] = useState(false)
 
   useLayoutEffect(() => {
-    if (user || loggedIn) {
-      navigate("/dashboard");
-    }
-  },[user, loggedIn]);
+    if (user) navigate("/dashboard")
+  }, [user, loggedIn])
 
-  const handleClick = () => setShow(!show);
+  const handleClick = () => setShow(!show)
 
   const handleLogin = async (e) => {
-      e.preventDefault();
-      setLoading(true);
-      const { email, password } = values;
-      let vals = { email, password };
-      try {
-        dispatch(login(vals));
-      } catch (err) {
-        console.log(err);
-      }
-
-  };
+    e.preventDefault()
+    setLoading(true)
+    const { email, password } = values
+    let vals = { email, password }
+    try {
+      dispatch(login(vals))
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <Centered>
       <Form onSubmit={handleLogin}>
-
         <FormControl>
           <h1>Welcome Back!</h1>
           <Container>
@@ -86,7 +78,7 @@ const Login = () => {
                 </Button>
               </InputRightElement>
             </InputGroup>
-          </Container>       
+          </Container>
           <Centered2>
             <Button
               size="md"
@@ -94,17 +86,16 @@ const Login = () => {
               colorScheme="purple"
               variant="solid"
             >
-  
               Login
             </Button>
           </Centered2>
         </FormControl>
         <div className={`behind-bg ${isError ? "error-slide" : ""}`}>
-        <h2>{errorMessage}</h2>
+          <h2>{errorMessage}</h2>
         </div>
       </Form>
     </Centered>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

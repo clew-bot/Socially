@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"
 import {
   Grid,
   Displayer,
@@ -6,40 +6,48 @@ import {
   ButtonContainer,
   CenteredDiv,
   TestimonialContainer,
-} from "../../styled/homepage.styled";
-import { Link } from "react-router-dom";
-import { Button } from "@chakra-ui/react";
-import MovingComponent from "react-moving-text";
-import teamUp from "../../assets/home/teamUp.svg";
-import coffeeFriends from "../../assets/home/coffeeFriends.svg";
-import people from "../../assets/home/people.svg";
+} from "../../styled/homepage.styled"
+import { Navigate, useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
+import { Button } from "@chakra-ui/react"
+import MovingComponent from "react-moving-text"
+import teamUp from "../../assets/home/teamUp.svg"
+import coffeeFriends from "../../assets/home/coffeeFriends.svg"
+import people from "../../assets/home/people.svg"
+import { useSelector } from "react-redux"
+import { authSelector } from "../../store/authSlice"
 
 const Home = () => {
-  const [text, setText] = useState("");
-  const [key, setKey] = useState(0);
+  const navigate = useNavigate()
+
+  const [text, setText] = useState("")
+  const [key, setKey] = useState(0)
+
+  const auth = useSelector(authSelector)
 
   useEffect(() => {
+    if (!auth.user) navigate("/login")
     const handleTimeout = () => {
-      setText("friends");
+      setText("friends")
       setTimeout(() => {
-        setKey(() => key + 1);
-        setText("enemies");
-      }, 1500);
+        setKey(() => key + 1)
+        setText("enemies")
+      }, 1500)
       setTimeout(() => {
-        setKey(() => key + 2);
-        setText("homies");
-      }, 3000);
+        setKey(() => key + 2)
+        setText("homies")
+      }, 3000)
       setTimeout(() => {
-        setKey(() => key + 3);
-        setText("buddies");
-      }, 4500);
+        setKey(() => key + 3)
+        setText("buddies")
+      }, 4500)
       setTimeout(() => {
-        setKey(() => key + 4);
-        setText("everyone ");
-      }, 6000);
-    };
-    handleTimeout();
-  }, []);
+        setKey(() => key + 4)
+        setText("everyone ")
+      }, 6000)
+    }
+    handleTimeout()
+  }, [])
 
   return (
     <>
@@ -110,8 +118,7 @@ const Home = () => {
             <img src={people} alt="" />
             <p>Make Friends</p>
           </div>
-          <div className="test-bg ">
-          </div>
+          <div className="test-bg "></div>
         </TestimonialContainer>
         <Footer>
           © Socially 2022
@@ -126,7 +133,7 @@ const Home = () => {
         </Footer>
       </Grid>
     </>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
