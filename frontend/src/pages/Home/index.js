@@ -26,7 +26,7 @@ const Home = () => {
   const auth = useSelector(authSelector)
 
   useEffect(() => {
-    if (!auth.user) navigate("/login")
+    // if (!auth.user) navigate("/login")
     const handleTimeout = () => {
       setText("friends")
       setTimeout(() => {
