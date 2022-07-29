@@ -11,7 +11,7 @@ import PostStatus from "../../components/PostStatus"
 import ChatLog from "../../components/ChatLog"
 import AboutDash from "../../components/AboutDash"
 import { useSelector } from "react-redux"
-import { authSelector } from "../../store/authSlice"
+import { authSelector } from "../../features/authSlice/authSlice.js"
 
 const Dashboard = () => {
   const navigate = useNavigate()

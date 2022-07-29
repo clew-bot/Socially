@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { login } from "../../store/authSlice"
+import { login } from "../../features/authSlice/authSlice.js"
 import { Form, Container, Centered, Centered2 } from "../../styled/login.styled"
 import { useForm } from "../../hooks/useForm"
 import {
@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
-import { authSelector } from "../../store/authSlice"
+import { authSelector } from "../../features/authSlice/authSlice.js"
 
 const Login = () => {
   const auth = useSelector(authSelector)

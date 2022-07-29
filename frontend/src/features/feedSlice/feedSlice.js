@@ -16,7 +16,7 @@ export const createPost = createAsyncThunk(
   },
 )
 
-const feedSlice = createSlice({
+export const feedSlice = createSlice({
   name: "feed",
   initialState: {
     isError: false,
