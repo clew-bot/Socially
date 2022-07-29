@@ -13,7 +13,6 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
 import { authSelector } from "../../features/authSlice/authSlice.js"
-
 const Login = () => {
   const auth = useSelector(authSelector)
   const { user, errorMessage, isError, loggedIn } = auth
@@ -30,8 +29,8 @@ const Login = () => {
   const [error, setError] = useState(false)
   const [showError, setShowError] = useState(false)
 
-  useLayoutEffect(() => {
-    if (user) navigate("/dashboard")
+  useEffect(() => {
+    if (auth.user) navigate("/dashboard")
   }, [user, loggedIn])
 
   const handleClick = () => setShow(!show)
