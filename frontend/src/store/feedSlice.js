@@ -4,24 +4,18 @@ import { useNavigate } from 'react-router-dom';
 
 export const createPost = createAsyncThunk(
     'feed/createPost',
-    async (user, thunkAPI) => {
-        console.log("i'm hit yo", user)
-        const response = await fetch('/api/auth/login', {
+    async (status, thunkAPI) => {
+        console.log("feed hit", JSON.stringify(status))
+        const response = await fetch('/api/feed/post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify({status}),
         });
         const data = await response.json();
         console.log(data)
-        if (data.loggedIn === false) {
-            console.log("error", data.message)
-            return thunkAPI.rejectWithValue(data.message);
-        } else {
-        localStorage.setItem("yllaicos1", JSON.stringify(data));
-            
-        }
+       
     }
 );
 

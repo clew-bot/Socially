@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import validator from "validator";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/authSlice";
 import {

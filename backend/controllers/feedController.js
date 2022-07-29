@@ -4,8 +4,8 @@ module.exports = feedController = {
         console.log("yo")
         res.json({"hi": "there"})
     },
+
     createPost: async (req, res) => {
-        const post = await db.Feed.create(req.body);
-        res.json(post);
+        console.log("yo", req.body)
     }
 }

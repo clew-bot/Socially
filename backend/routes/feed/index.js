@@ -4,7 +4,7 @@ const requireAuth = require("../../middleware/middleware");
 
 
 router.get("/", feedController.getFeed)
-router.post("/", feedController.createPost)
+router.post("/post", feedController.createPost)
 
 
 module.exports = router;

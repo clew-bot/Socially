@@ -4,7 +4,13 @@ import {Textarea, Avatar, AvatarBadge, AvatarGroup, Button, Box } from '@chakra-
 import Picker from 'emoji-picker-react';
 import { FaSmileWink, FaSmileBeam } from 'react-icons/fa';
 import { Progress } from '@chakra-ui/react'
+import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "../../store/feedSlice";
+
+
 const PostStatus = () => {
+  // const { user, errorMessage, isError, loggedIn } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [status, setStatus] = useState('');
   const [emojiPicker, setEmojiPicker] = useState(false);
@@ -22,14 +28,7 @@ const PostStatus = () => {
   }
 
   const handleSubmit = async () => {
-    console.log(status);
-    const response = await fetch('/api/feed', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
-    console.log("response", response)
+    dispatch(createPost(status));
   }
 
   return (
