@@ -20,7 +20,7 @@ function App() {
       <Route path="/signup" element={<Signup/>} />
       <Route path="/login" element={<Login/>} />
       <Route path="/profile/:id" element={<Profile/>} />
-      <Route path="/dashboard" element={<RequireAuth Component={Dashboard}/>} />
+      <Route path="/dashboard" element={<Dashboard/>}/>
 
     </Routes>
     </>

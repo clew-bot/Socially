@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Grid, Displayer, FriendsTab } from '../../styled/dashboard.styled';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import ChatContainer from '../../components/ChatContainer';
 import PostStatus from '../../components/PostStatus';
 import ChatLog from '../../components/ChatLog';
 import AboutDash from "../../components/AboutDash";
 const Dashboard = () => {
-
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [lastLogged, setLastLogged] = useState(false);
@@ -17,15 +17,9 @@ const Dashboard = () => {
 
   useEffect(() => {
       const vals = JSON.parse(localStorage.getItem("yllaicos1"));
-  
-
-      console.log("the details: ", vals);
-      setId(vals.id)
-      setGender(vals.gender)
-      setLastLogged(vals.lastLogged)
-      setBirthday(vals.birthday)
-      setName(vals.username)
-      console.log(name)
+      if (vals === null) {
+        navigate("/login")
+      }
   }, [])
   return (
     <Grid>
