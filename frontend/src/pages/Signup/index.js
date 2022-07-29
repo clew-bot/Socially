@@ -27,7 +27,7 @@ import {
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { FcBusinesswoman, FcManager } from "react-icons/fc"
 import { useSelector } from "react-redux"
-import { authSelector } from "../../store/authSlice"
+import { authSelector } from "../../features/authSlice/authSlice.js"
 import { useNavigate } from "react-router-dom"
 
 const Signup = () => {

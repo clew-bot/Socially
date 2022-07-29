@@ -15,7 +15,7 @@ import teamUp from "../../assets/home/teamUp.svg"
 import coffeeFriends from "../../assets/home/coffeeFriends.svg"
 import people from "../../assets/home/people.svg"
 import { useSelector } from "react-redux"
-import { authSelector } from "../../store/authSlice"
+import { authSelector } from "../../features/authSlice/authSlice.js"
 
 const Home = () => {
   const navigate = useNavigate()

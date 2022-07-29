@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { useSelector } from "react-redux"
-import { authSelector } from "../../store/authSlice"
+import { authSelector } from "../../features/authSlice/authSlice.js"
 import { Container, BackgroundContainer } from "../../styled/profile.styled"
 
 const Profile = () => {
