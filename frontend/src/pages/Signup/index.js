@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import validator from "validator";
+import React, { useEffect, useState } from "react"
+import validator from "validator"
 import {
   Form,
   Container,
@@ -7,8 +7,8 @@ import {
   Centered2,
   GenderContainer,
   BirthdayContainer,
-} from "../../styled/signup.styled";
-import { useForm } from "../../hooks/useForm";
+} from "../../styled/signup.styled"
+import { useForm } from "../../hooks/useForm"
 import {
   Input,
   Button,
@@ -23,11 +23,16 @@ import {
   InputGroup,
   Select,
   FormHelperText,
-} from "@chakra-ui/react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { FcBusinesswoman, FcManager } from "react-icons/fc";
+} from "@chakra-ui/react"
+import { FaEye, FaEyeSlash } from "react-icons/fa"
+import { FcBusinesswoman, FcManager } from "react-icons/fc"
+import { useSelector } from "react-redux"
+import { authSelector } from "../../store/authSlice"
+import { useNavigate } from "react-router-dom"
+
 const Signup = () => {
-  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   const [values, handleChange] = useForm({
     email: "",
     username: "",
@@ -37,59 +42,65 @@ const Signup = () => {
     year: "1995",
     month: "01",
     sAnswer: "",
-  });
-  const [gender, setGender] = useState("male");
-  const [securityQuestion, setSecurityQuestion] = useState("");
-  const [show, setShow] = useState(false);
-  const [emailError, setEmailError] = useState("");
-  const [error, setError] = useState(false);
-  const [pwError, setPWError] = useState(false);
-  const [nameError, setNameError] = useState(false);
-  const [birthdayError, setBirthdayError] = useState(false);
+  })
+  const [gender, setGender] = useState("male")
+  const [securityQuestion, setSecurityQuestion] = useState("")
+  const [show, setShow] = useState(false)
+  const [emailError, setEmailError] = useState("")
+  const [error, setError] = useState(false)
+  const [pwError, setPWError] = useState(false)
+  const [nameError, setNameError] = useState(false)
+  const [birthdayError, setBirthdayError] = useState(false)
 
-  const handleClick = () => setShow(!show);
+  const auth = useSelector(authSelector)
 
-  let isError = false;
+  useEffect(() => {
+    if (!auth.user) navigate("/login")
+  }, [])
+
+  const handleClick = () => setShow(!show)
+
+  let isError = false
 
   const validateEmail = (email) => {
     if (validator.isEmail(email)) {
-      setEmailError("");
-      setError(false);
-      return true;
+      setEmailError("")
+      setError(false)
+      return true
     } else {
-      return false;
+      return false
     }
-  };
+  }
   const handleSignUp = async (e) => {
-    setLoading(true);
-    e.preventDefault();
+    setLoading(true)
+    e.preventDefault()
     if (!validateEmail(values.email)) {
-      setEmailError("This field is invalid");
-      setError(true);
+      setEmailError("This field is invalid")
+      setError(true)
     }
     if (
       values.password !== values.confirmPassword ||
       values.password.length === 0
     ) {
-      setPWError(true);
-      isError = true;
-      console.log(isError);
+      setPWError(true)
+      isError = true
+      console.log(isError)
     }
     if (values.username === "") {
-      setNameError(true);
-      isError = true;
+      setNameError(true)
+      isError = true
     }
     if (values.month === "month") {
-      setBirthdayError(true);
-      isError = true;
+      setBirthdayError(true)
+      isError = true
     }
     if (isError === true) {
-      setLoading(true);
-      return;
+      setLoading(true)
+      return
     }
 
-    let birthday = `${values.year}-${values.month}-${values.day}`;
-    setLoading(() => !loading);
+    let birthday = `${values.year}-${values.month}-${values.day}`
+    setLoading(() => !loading)
     const data = await fetch("/api/auth", {
       method: "POST",
       headers: {
@@ -102,16 +113,15 @@ const Signup = () => {
         birthday: birthday,
         sQuestion: securityQuestion,
         sAnswer: values.sAnswer,
-        gender: gender
+        gender: gender,
+      }),
     })
-  });
-    const json = await data.json();
-    console.log("Response = ", json);
-  };
+    const json = await data.json()
+    console.log("Response = ", json)
+  }
   return (
     <Centered>
       <Form onSubmit={handleSignUp}>
-
         <FormControl>
           <h1>Create Account</h1>
           <Container>
@@ -174,7 +184,7 @@ const Signup = () => {
               icon={""}
               className="gender-select"
               onChange={(e) => {
-                setGender(e.target.value);
+                setGender(e.target.value)
               }}
             >
               <option value="Male">Male</option>
@@ -259,7 +269,7 @@ const Signup = () => {
               name="sQuestion"
               width="500px"
               onChange={(e) => {
-                setSecurityQuestion(e.target.value);
+                setSecurityQuestion(e.target.value)
               }}
             >
               <option defaultValue="Pick a question" disabled>
@@ -275,7 +285,12 @@ const Signup = () => {
                 What is your favorite food
               </option>
             </Select>
-            <Input onChange={handleChange} id="sAnswer" name="sAnswer" placeholder="Answer"></Input>
+            <Input
+              onChange={handleChange}
+              id="sAnswer"
+              name="sAnswer"
+              placeholder="Answer"
+            ></Input>
           </Container>
           <br />
           {/* {!isError ? (
@@ -294,11 +309,10 @@ const Signup = () => {
             </Button>
           </Centered2>
         </FormControl>
-        <div className="behind-bg">
-        </div>
+        <div className="behind-bg"></div>
       </Form>
     </Centered>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Signup
