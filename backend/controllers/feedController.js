@@ -1,22 +1,19 @@
 const db = require("../models");
-const checkSession = require("../middleware/middleware.js");
 const mongoose = require("mongoose");
 const toId = mongoose.Types.ObjectId;
-module.exports = feedController = {
 
+
+module.exports = feedController = {
     getFeed: async (req, res) => {
-        console.log("yo")
-        res.json({"hi": "there"})
+        const Posts = await db.Status.find({}).populate('postedBy').limit(50).sort({ createdAt: -1 }).lean();
+        console.log(Posts);
+        res.json({isAuth: true, posts: Posts});
     },
 
     createPost: async (req, res) => {
-        console.log("yo", req.body)
         const { status } = req.body;
-        console.log(status);
         const getUser = await db.User.findOne({ _id: req.session.user.id });
-        console.log(getUser);
         const userID = toId(getUser._id);
-        console.log("welcome", userID)
         const postedStatus = await db.Status.create({
             status: status,
             username: getUser.username,
@@ -29,6 +26,6 @@ module.exports = feedController = {
             { $push: { posts: postId } }
           );
         console.log("Updated Post on User: ", updateUserPost);
-        
+        res.json({isAuth: true, message: "Post created successfully"});
     }
 }

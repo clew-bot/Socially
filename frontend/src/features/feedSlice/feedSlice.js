@@ -16,21 +16,48 @@ export const createPost = createAsyncThunk(
   },
 )
 
+export const getFeed = createAsyncThunk(
+  "feed/getFeed",
+  async (_, thunkAPI) => {
+    const response = await fetch("/api/feed/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json()
+    if (data.isAuth === true) {
+      console.log(data)
+      return thunkAPI.fulfillWithValue(data.posts)
+  } else {
+    return thunkAPI.rejectWithValue("You are not logged in")
+    }
+  }
+)
+
 export const feedSlice = createSlice({
   name: "feed",
   initialState: {
     isError: false,
     errorMessage: null,
+    posts: [],
   },
   reducers: {},
-  extraReducers: {
-    [createPost.rejected]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(createPost.rejected, (state, action) => {
       state.errorMessage = action.payload
       state.isError = true
-    },
-    [createPost.fulfilled]: (state, action) => {},
-  },
+    });
+
+    builder.addCase(createPost.fulfilled, (state, action) => {});
+
+    builder.addCase(getFeed.fulfilled, (state, action) => {
+      console.log(action.payload);      state.posts = action.payload
+    });
+  }
 })
+
+export const feedSelector = (state) => state.feed
 
 export const feedActions = feedSlice.actions
 

@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
 
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-  console.log("i'm hit yo", user)
   const response = await fetch("/api/auth/login", {
     method: "POST",
     headers: {
