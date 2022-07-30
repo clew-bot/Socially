@@ -12,6 +12,10 @@ const statusSchema = new Schema({
     required: true,
     ref: "User",
   },
+  postedBy: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   timeCreated: {
     type: Date,
     default: Date.now,

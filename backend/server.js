@@ -54,8 +54,8 @@ io.on('connection', (socket) => {
 
 
 mongoose.connect(
-    process.env.MONGO_URI,
-    // "mongodb://localhost/socially",
+    // process.env.MONGO_URI,
+    "mongodb://localhost/socially",
     options,
     (err) => {
      if(err) console.log(err) 

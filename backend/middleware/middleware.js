@@ -1,21 +1,11 @@
-module.exports = requireAuth = async (req, res, next) => {
-    console.log("hit")
-    if (req.session.user) {
-        const user = await db.User.findOne({ _id: req.session.user.id });
-        if (user) {
-        req.user = user;
-        next();
-        } else {
-        res.json({ message: "User does not exist" });
-        }
-    } else {
-        res.json({ message: "User is not logged in" });
-    }
-    }
-
-module.exports = checkSession = async (req, res, next) => {
+module.exports = authorizedRoute = async (req, res, next) => {
     console.log(req.session);
-    // if (req.session.user) {
+    if (!req.session.user) {
+        res.status(401).json({ message: "User is not logged in", isAuth: false });
+    } else {
+        console.log("user found: ", req.session.user);
+        next();
+    }
     //     const user = await db.User.findOne({ _id: req.session.user.id });
     //     if (user) {
     //     req.user = user;

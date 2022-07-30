@@ -55,8 +55,9 @@ const Signup = () => {
   const auth = useSelector(authSelector)
 
   useEffect(() => {
-    if (!auth.user) navigate("/login")
-  }, [])
+    // if (!auth.user) navigate("/login")
+    if (auth.user) navigate("/dashboard");
+  }, [auth])
 
   const handleClick = () => setShow(!show)
 
