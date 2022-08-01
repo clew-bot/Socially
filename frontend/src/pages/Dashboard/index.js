@@ -23,7 +23,7 @@ const Dashboard = () => {
   const navigate = useNavigate()
   const [name, setName] = useState("")
   const [loading,setLoading] = useState(true)
-  const [theFeed, setTheFeed] = useState([])
+
 
 
   const [details, setDetails] = useState({
@@ -33,8 +33,8 @@ const Dashboard = () => {
     gender: "",
   })
 
-  const auth = useSelector(authSelector)
-  const feed = useSelector((state) => state.feed);
+  const auth = useSelector(authSelector);
+  const feed = useSelector(feedSelector);
   useEffect(() => {
     if (!auth.user){
       navigate("/login")} 
@@ -42,10 +42,7 @@ const Dashboard = () => {
 
             dispatch(getFeed())
             setLoading(false);
-            console.log("Feed Posts: ", feed.posts[0])
-            setTheFeed(current => [feed.posts])
-            console.log("The Feed: ", theFeed)
-
+            console.log("Feed Posts: ", feed.posts)
     }
   }, [feed.success])
   return (
@@ -58,7 +55,9 @@ const Dashboard = () => {
       <Displayer>
         <PostStatus />
         
-        {feed.success && feed.posts.map((post, index) => {
+        {feed.success && feed.posts.map
+        ((post, index) => {
+          console.log("FeedPost length: ", feed.posts.length)
           return <ChatLog key={index} post={post[index]} />
         })}
 

@@ -55,7 +55,7 @@ export const feedSlice = createSlice({
 
     builder.addCase(getFeed.fulfilled, (state, action) => {
       console.log("Action payload: ", action.payload);      
-      state.posts.push(...state.posts, action.payload);
+      state.posts.push(action.payload);
       state.success = true;
 
     });
