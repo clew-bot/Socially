@@ -3,10 +3,12 @@ import { Avatar, AvatarBadge, AvatarGroup, Button, Divider } from '@chakra-ui/re
 import { TopDiv, Container, TextContainer } from "./chatlog.styled";
 import {IoEllipsisHorizontalCircleSharp} from 'react-icons/io5'
 
-const ChatLog = () => {
+const ChatLog = ({post}) => {
+  // console.log("post from chatlog: ", post.username)
   const [showMore, setShowMore] = useState(false);
 
-  let text = `Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem Hello world! lorem ipsum dolor sit amet, consectetur adipiscing elit. lorem `
+  let text = `${post.status}`
+  let username = `${post.username}`
   return (
     <Container>
     <TopDiv>
@@ -20,10 +22,11 @@ const ChatLog = () => {
         </AvatarGroup>
       
           <div className="name-container">
-            <strong>Chad Lew</strong>  
+            <strong>{username}</strong>  
               <p>27m</p>
           </div>
       </div>
+
       <div className="ellip-icon">
         <IoEllipsisHorizontalCircleSharp size={"2.4rem"}/>
       </div>

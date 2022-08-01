@@ -39,6 +39,7 @@ export const feedSlice = createSlice({
   name: "feed",
   initialState: {
     isError: false,
+    success: false,
     errorMessage: null,
     posts: [],
   },
@@ -47,12 +48,16 @@ export const feedSlice = createSlice({
     builder.addCase(createPost.rejected, (state, action) => {
       state.errorMessage = action.payload
       state.isError = true
+      
     });
 
     builder.addCase(createPost.fulfilled, (state, action) => {});
 
     builder.addCase(getFeed.fulfilled, (state, action) => {
-      console.log(action.payload);      state.posts = action.payload
+      console.log("Action payload: ", action.payload);      
+      state.posts.push(...state.posts, action.payload);
+      state.success = true;
+
     });
   }
 })

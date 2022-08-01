@@ -22,12 +22,10 @@ const Dashboard = () => {
 
   const navigate = useNavigate()
   const [name, setName] = useState("")
-  const [loading,setLoading] = useState(false)
-  const [email, setEmail] = useState("")
-  const [lastLogged, setLastLogged] = useState(false)
-  const [gender, setGender] = useState("")
-  const [birthday, setBirthday] = useState("")
-  const [id, setId] = useState("")
+  const [loading,setLoading] = useState(true)
+  const [theFeed, setTheFeed] = useState([])
+
+
   const [details, setDetails] = useState({
     name: "",
     email: "",
@@ -36,31 +34,41 @@ const Dashboard = () => {
   })
 
   const auth = useSelector(authSelector)
-  const feed = useSelector(feedSelector);
+  const feed = useSelector((state) => state.feed);
   useEffect(() => {
     if (!auth.user){
       navigate("/login")} 
         else {
-          setLoading(!loading);
-          dispatch(getFeed())
-          setTimeout(() => {
-            console.log(feed)
-          }, 3000);
+
+            dispatch(getFeed())
+            setLoading(false);
+            console.log("Feed Posts: ", feed.posts[0])
+            setTheFeed(current => [feed.posts])
+            console.log("The Feed: ", theFeed)
+
     }
-  }, [])
+  }, [feed.success])
   return (
     <Grid>
+
       {name}
       <FriendsTab>
         <AboutDash name={name}></AboutDash>
       </FriendsTab>
       <Displayer>
         <PostStatus />
+        
+        {feed.success && feed.posts.map((post, index) => {
+          return <ChatLog key={index} post={post[index]} />
+        })}
+
+
+
+        {/* <ChatLog />
         <ChatLog />
         <ChatLog />
         <ChatLog />
-        <ChatLog />
-        <ChatLog />
+        <ChatLog /> */}
       </Displayer>
     </Grid>
   )
