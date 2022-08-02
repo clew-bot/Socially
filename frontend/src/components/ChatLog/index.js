@@ -6,7 +6,7 @@ import {IoEllipsisHorizontalCircleSharp} from 'react-icons/io5'
 const ChatLog = ({post}) => {
   // console.log("post from chatlog: ", post.username)
   const [showMore, setShowMore] = useState(false);
-
+  console.log(post)
   let text = `${post.status}`
   let username = `${post.username}`
   return (
@@ -22,7 +22,7 @@ const ChatLog = ({post}) => {
         </AvatarGroup>
       
           <div className="name-container">
-            <strong>{username}</strong>  
+           <strong>{username}</strong>   
               <p>27m</p>
           </div>
       </div>
@@ -34,7 +34,7 @@ const ChatLog = ({post}) => {
     <Divider/>
     <TextContainer className="text-container">
      
-     <p>{showMore ? text : `${text.substring(0, 250)}`}</p>
+     <p>{showMore ? text && text : `${text.substring(0, 250)}`}</p>
      <Button className="show-more" bg={""} onClick={() => setShowMore(!showMore)}>See more</Button>
    </TextContainer>
    <div className="status-bg"></div>

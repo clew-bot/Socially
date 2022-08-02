@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useMemo } from "react"
 import {
   Container,
   Grid,
@@ -24,21 +24,13 @@ const Dashboard = () => {
   const [name, setName] = useState("")
   const [loading,setLoading] = useState(true)
 
-
-
-  const [details, setDetails] = useState({
-    name: "",
-    email: "",
-    lastLogged: "",
-    gender: "",
-  })
-
   const auth = useSelector(authSelector);
   const feed = useSelector(feedSelector);
   useEffect(() => {
     if (!auth.user){
       navigate("/login")} 
         else {
+
 
             dispatch(getFeed())
             setLoading(false);
@@ -48,6 +40,7 @@ const Dashboard = () => {
   return (
     <Grid>
 
+
       {name}
       <FriendsTab>
         <AboutDash name={name}></AboutDash>
@@ -55,10 +48,9 @@ const Dashboard = () => {
       <Displayer>
         <PostStatus />
         
-        {feed.success && feed.posts.map
+        {feed.posts.map
         ((post, index) => {
-          console.log("FeedPost length: ", feed.posts.length)
-          return <ChatLog key={index} post={post[index]} />
+          return <ChatLog key={index} post={post} />
         })}
 
 

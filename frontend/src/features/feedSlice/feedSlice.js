@@ -28,7 +28,8 @@ export const getFeed = createAsyncThunk(
     const data = await response.json()
     if (data.isAuth === true) {
       console.log(data)
-      return thunkAPI.fulfillWithValue(data.posts)
+      // return thunkAPI.fulfillWithValue(data.posts)
+      return data.posts
   } else {
     return thunkAPI.rejectWithValue("You are not logged in")
     }
@@ -54,9 +55,7 @@ export const feedSlice = createSlice({
     builder.addCase(createPost.fulfilled, (state, action) => {});
 
     builder.addCase(getFeed.fulfilled, (state, action) => {
-      console.log("Action payload: ", action.payload);      
-      state.posts.push(action.payload);
-      state.success = true;
+      state.posts = action.payload;
 
     });
   }
