@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Avatar, AvatarBadge, AvatarGroup, Button, Divider } from '@chakra-ui/react'
 import { TopDiv, Container, TextContainer } from "./chatlog.styled";
 import {IoEllipsisHorizontalCircleSharp} from 'react-icons/io5'
+import { Link } from "react-router-dom";
 
 const ChatLog = ({post}) => {
   // console.log("post from chatlog: ", post.username)
@@ -9,6 +10,7 @@ const ChatLog = ({post}) => {
   console.log(post)
   let text = `${post.status}`
   let username = `${post.username}`
+  let id = `${post.postedBy._id}`
   return (
     <Container>
     <TopDiv>
@@ -22,7 +24,10 @@ const ChatLog = ({post}) => {
         </AvatarGroup>
       
           <div className="name-container">
-           <strong>{username}</strong>   
+ 
+            <Link to={`/profile/${id}`}>
+            <strong>{username}</strong>  
+            </Link>
               <p>27m</p>
           </div>
       </div>
