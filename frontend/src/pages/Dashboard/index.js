@@ -4,6 +4,7 @@ import {
   Grid,
   Displayer,
   FriendsTab,
+  NewsTab
 } from "../../styled/dashboard.styled"
 import { Navigate, useNavigate } from "react-router-dom"
 import { getFeed } from "../../features/feedSlice/feedSlice.js"
@@ -45,6 +46,9 @@ const Dashboard = () => {
       <FriendsTab>
         <AboutDash name={name}></AboutDash>
       </FriendsTab>
+      <NewsTab>
+        <div>Yo</div>
+      </NewsTab>
       <Displayer>
         <PostStatus />
         

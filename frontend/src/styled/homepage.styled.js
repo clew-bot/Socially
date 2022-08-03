@@ -12,7 +12,8 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  z-index: 4;
+  position: sticky; top: 0;
   .icons-section {
     display: flex;
     align-items: space-between;

@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: sticky;
   
   div {
     font-size: 1.2rem;
