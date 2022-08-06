@@ -18,8 +18,9 @@ export const createPost = createAsyncThunk(
 
 export const getFeed = createAsyncThunk(
   "feed/getFeed",
-  async (_, thunkAPI) => {
-    const response = await fetch("/api/feed/", {
+  async (pageId, thunkAPI) => {
+    console.log(pageId)
+    const response = await fetch(`/api/feed/${pageId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

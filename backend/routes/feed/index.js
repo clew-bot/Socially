@@ -3,7 +3,7 @@ const feedController = require("../../controllers/feedController");
 const authorizedRoute = require("../../middleware/middleware");
 
 
-router.get("/", authorizedRoute, feedController.getFeed)
+router.get("/:pageId", authorizedRoute, feedController.getFeed)
 router.post("/post", authorizedRoute, feedController.createPost)
 
 

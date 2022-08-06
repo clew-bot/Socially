@@ -5,8 +5,12 @@ const toId = mongoose.Types.ObjectId;
 
 module.exports = feedController = {
     getFeed: async (req, res) => {
-        const Posts = await db.Status.find({}).populate('postedBy').limit(50).sort({ createdAt: -1 }).lean();
-        console.log(Posts);
+        const { pageId } = req.params;
+        console.log("the page id: ", pageId);
+        const totalLimit = 10;
+        let limit = parseInt(totalLimit);
+        let skip = (parseInt(pageId)-1) * parseInt(totalLimit);
+        const Posts = await db.Status.find({}).populate('postedBy').limit(limit).skip(skip).sort({ createdAt: -1 }).lean();
         res.json({isAuth: true, posts: Posts});
     },
 

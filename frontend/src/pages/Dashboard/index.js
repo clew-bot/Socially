@@ -33,7 +33,7 @@ const Dashboard = () => {
         else {
 
 
-            dispatch(getFeed())
+            dispatch(getFeed(1))
             setLoading(false);
             console.log("Feed Posts: ", feed.posts)
     }
@@ -51,7 +51,6 @@ const Dashboard = () => {
       </NewsTab>
       <Displayer>
         <PostStatus />
-        
         {feed.posts.map
         ((post, index) => {
           return <ChatLog key={index} post={post} />
