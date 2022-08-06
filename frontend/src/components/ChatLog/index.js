@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const ChatLog = ({post}) => {
   // console.log("post from chatlog: ", post.username)
   const [showMore, setShowMore] = useState(false);
-  console.log(post)
+  // console.log(post)
   let text = `${post.status}`
   let username = `${post.username}`
   let id = `${post.postedBy._id}`

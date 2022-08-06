@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import {
   Container,
   Grid,
@@ -18,7 +18,7 @@ import { authSelector } from "../../features/authSlice/authSlice.js"
 
 const Dashboard = () => {
 
- 
+  const exampleRef = useRef(null)
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
@@ -31,13 +31,31 @@ const Dashboard = () => {
     if (!auth.user){
       navigate("/login")} 
         else {
-
-
             dispatch(getFeed(1))
             setLoading(false);
             console.log("Feed Posts: ", feed.posts)
     }
   }, [feed.success])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          console.log("We hit!")
+          dispatch(getFeed(feed.pageId + 1))
+        }
+      })
+    })
+    if (exampleRef.current) {
+      observer.observe(exampleRef.current)
+    }
+
+    return () => {
+      if(exampleRef.current) {
+      observer.unobserve(exampleRef.current)
+      }
+    }
+  }, [])
   return (
     <Grid>
 
@@ -63,6 +81,7 @@ const Dashboard = () => {
         <ChatLog />
         <ChatLog />
         <ChatLog /> */}
+        <div ref={exampleRef}>Can't see me!</div>
       </Displayer>
     </Grid>
   )

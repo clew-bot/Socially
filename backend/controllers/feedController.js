@@ -16,8 +16,9 @@ module.exports = feedController = {
 
     createPost: async (req, res) => {
         const { status } = req.body;
-        const getUser = await db.User.findOne({ _id: req.session.user.id });
-        const userID = toId(getUser._id);
+        // const getUser = await db.User.findOne({ _id: req.session.user.id });
+        const currentUser = req.session.user.id 
+        const userID = toId(currentUser._id);
         const postedStatus = await db.Status.create({
             status: status,
             username: getUser.username,
