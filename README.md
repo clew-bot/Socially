@@ -10,3 +10,5 @@ Socially is Social Media website allowing users to make friends from around the 
 
 - [@clew-bot](https://www.github.com/clew-bot)
 
+## Contributors
+[@TannerBarcelos](https://github.com/TannerBarcelos)
