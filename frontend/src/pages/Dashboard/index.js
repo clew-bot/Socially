@@ -27,22 +27,30 @@ const Dashboard = () => {
 
   const auth = useSelector(authSelector);
   const feed = useSelector(feedSelector);
+
+  const consoleme = () => {
+    console.log("Yo", loading)
+  }
+
   useEffect(() => {
     if (!auth.user){
       navigate("/login")} 
         else {
             dispatch(getFeed(1))
-            setLoading(false);
+  
             console.log("Feed Posts: ", feed.posts)
     }
-  }, [feed.success])
+  }, [])
 
   useEffect(() => {
+    
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
+
+        if (feed.success && entry.isIntersecting && entry.intersectionRatio > 0) {
           console.log("We hit!")
-          dispatch(getFeed(feed.pageId + 1))
+          console.log(entry.intersectionRatio)
+          // dispatch(getFeed(feed.pageId + 1))
         }
       })
     })
@@ -55,33 +63,29 @@ const Dashboard = () => {
       observer.unobserve(exampleRef.current)
       }
     }
-  }, [])
+  }, [ exampleRef.current ])
+
   return (
     <Grid>
 
 
       {name}
+   
       <FriendsTab>
         <AboutDash name={name}></AboutDash>
+        <button onClick={consoleme}>Test</button>
+
       </FriendsTab>
       <NewsTab>
         <div>Yo</div>
       </NewsTab>
       <Displayer>
         <PostStatus />
-        {feed.posts.map
+        { feed.posts.map
         ((post, index) => {
-          return <ChatLog key={index} post={post} />
+          return  <ChatLog key={index} post={post} />
         })}
-
-
-
-        {/* <ChatLog />
-        <ChatLog />
-        <ChatLog />
-        <ChatLog />
-        <ChatLog /> */}
-        <div ref={exampleRef}>Can't see me!</div>
+       <div ref={exampleRef}>Can't see me!</div>
       </Displayer>
     </Grid>
   )

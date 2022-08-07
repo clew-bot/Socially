@@ -28,7 +28,7 @@ export const getFeed = createAsyncThunk(
     })
     const data = await response.json()
     if (data.isAuth === true) {
-      console.log(data)
+      // console.log(data)
       // return thunkAPI.fulfillWithValue(data.posts)
       return data.posts
   } else {
@@ -57,7 +57,7 @@ export const feedSlice = createSlice({
 
     builder.addCase(getFeed.fulfilled, (state, action) => {
       state.posts = action.payload;
-
+      state.success = true;
     });
   }
 })

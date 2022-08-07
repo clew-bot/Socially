@@ -90,7 +90,7 @@ const Home = () => {
                     Sign In
                   </Button>
                 </Link>
-                <Link to={auth.user ? "/dashboard" : "/login"}>
+                <Link to={auth.user ? "/dashboard" : "/signup"}>
                   <Button
                     colorScheme={"yellow"}
                     color={"black"}
