@@ -80,7 +80,7 @@ const Home = () => {
                 in to use Socially on the web
               </p>
               <ButtonContainer>
-                <Link to={"/login"}>
+                <Link to={auth.user ? "/dashboard" : "/login"}>
                   <Button
                     colorScheme={"yellow"}
                     marginRight="10px"
@@ -90,7 +90,7 @@ const Home = () => {
                     Sign In
                   </Button>
                 </Link>
-                <Link to={"/signup"}>
+                <Link to={auth.user ? "/dashboard" : "/login"}>
                   <Button
                     colorScheme={"yellow"}
                     color={"black"}
