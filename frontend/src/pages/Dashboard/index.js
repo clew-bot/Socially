@@ -8,6 +8,7 @@ import {
 } from "../../styled/dashboard.styled"
 import { Navigate, useNavigate } from "react-router-dom"
 import { getFeed } from "../../features/feedSlice/feedSlice.js"
+import { getMoreFeed } from "../../features/feedSlice/feedSlice.js"
 import PostStatus from "../../components/PostStatus"
 import ChatLog from "../../components/ChatLog"
 import AboutDash from "../../components/AboutDash"
@@ -42,22 +43,21 @@ const Dashboard = () => {
     }
   }, [])
 
+
   useEffect(() => {
-    
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-
         if (feed.success && entry.isIntersecting && entry.intersectionRatio > 0) {
           console.log("We hit!")
-          console.log(entry.intersectionRatio)
-          // dispatch(getFeed(feed.pageId + 1))
+          console.log(feed.pageId)
+          dispatch(getMoreFeed(2))
         }
       })
     })
     if (exampleRef.current) {
       observer.observe(exampleRef.current)
+      console.log("I'm obsvering you kid.")
     }
-
     return () => {
       if(exampleRef.current) {
       observer.unobserve(exampleRef.current)
@@ -81,7 +81,7 @@ const Dashboard = () => {
       </NewsTab>
       <Displayer>
         <PostStatus />
-        { feed.posts.map
+        {feed.success &&  feed.posts.map
         ((post, index) => {
           return  <ChatLog key={index} post={post} />
         })}

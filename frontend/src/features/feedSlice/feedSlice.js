@@ -28,8 +28,25 @@ export const getFeed = createAsyncThunk(
     })
     const data = await response.json()
     if (data.isAuth === true) {
-      // console.log(data)
-      // return thunkAPI.fulfillWithValue(data.posts)
+      return data.posts
+  } else {
+    return thunkAPI.rejectWithValue("You are not logged in")
+    }
+  }
+)
+
+export const getMoreFeed = createAsyncThunk(
+  "feed/getMoreFeed",
+  async (pageId, thunkAPI) => {
+    console.log(pageId)
+    const response = await fetch(`/api/feed/${2}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    const data = await response.json()
+    if (data.isAuth === true) {
       return data.posts
   } else {
     return thunkAPI.rejectWithValue("You are not logged in")
@@ -52,11 +69,16 @@ export const feedSlice = createSlice({
       state.isError = true
       
     });
-
     builder.addCase(createPost.fulfilled, (state, action) => {});
 
     builder.addCase(getFeed.fulfilled, (state, action) => {
       state.posts = action.payload;
+      console.log("Posts: ", state.posts)
+      state.success = true;
+    });
+    builder.addCase(getMoreFeed.fulfilled, (state, action) => {
+      state.posts = [...state.posts, ...action.payload];
+      console.log("Getting more posts: ", state.posts)
       state.success = true;
     });
   }
