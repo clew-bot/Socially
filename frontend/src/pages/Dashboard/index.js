@@ -1,21 +1,19 @@
 import React, { useEffect, useState, useRef } from "react"
 import {
-  Container,
   Grid,
   Displayer,
   FriendsTab,
   NewsTab
 } from "../../styled/dashboard.styled"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { getFeed } from "../../features/feedSlice/feedSlice.js"
-import { getMoreFeed } from "../../features/feedSlice/feedSlice.js"
 import PostStatus from "../../components/PostStatus"
 import ChatLog from "../../components/ChatLog"
 import AboutDash from "../../components/AboutDash"
 import { useSelector, useDispatch } from "react-redux"
 import { feedSelector } from "../../features/feedSlice/feedSlice.js"
 import { authSelector } from "../../features/authSlice/authSlice.js"
-import { cookieStorageManager } from "@chakra-ui/react"
+
 
 
 const Dashboard = () => {
@@ -24,7 +22,7 @@ const Dashboard = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [name, setName] = useState("")
-  const [pageId, setPageId] = useState(1)
+  const [pageNumber, setPageNumber] = useState(1)
 
   const auth = useSelector(authSelector);
   const feed = useSelector(feedSelector);
@@ -34,35 +32,27 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    if (!auth.user){
-      navigate("/login")} 
-        else {
-            dispatch(getFeed(pageId))
-            console.log("Feed Posts: ", feed.posts)
-    }
-  }, [])
-
-  useEffect(() => {
+    if (!auth.user) navigate("/login")
     let currently = lastDiv.current;
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!feed.loading && feed.hasMorePosts && entry.isIntersecting && entry.intersectionRatio > 0) {
-          setPageId(pageId => pageId + 1)
-          console.log("counter: ", pageId)
-          dispatch(getMoreFeed(pageId + 1))
+          setPageNumber(pageNumber => pageNumber + 1)
+          dispatch(getFeed(pageNumber))
         }
       })
     })
     if (currently) {
       observer.observe(lastDiv.current)
-      console.log("I'm obsvering you kid.")
+      // console.log("I'm obsvering you kid.")
     }
     return () => {
       if(currently) {
       observer.unobserve(currently)
       }
     }
-  }, [dispatch, feed.loading, pageId])
+
+  }, [auth.user, dispatch, feed.hasMorePosts, feed.loading, feed.posts, navigate, pageNumber])
 
   return (
     <Grid>
@@ -72,7 +62,7 @@ const Dashboard = () => {
    
       <FriendsTab>
         <AboutDash name={name}></AboutDash>
-        <button onClick={consoleme}><h1>TESTING</h1></button>
+        {/* <button onClick={consoleme}><h1>TESTING</h1></button> */}
 
       </FriendsTab>
       <NewsTab>

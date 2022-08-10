@@ -8,8 +8,6 @@ module.exports = feedController = {
     getFeed: async (req, res) => {
         try {
         const { pageNumber } = req.params;
-        console.log("req params: ", req.params);
-        console.log("the page id: ", pageNumber);
         const totalLimit = 10;
         let limit = parseInt(totalLimit);
         let skip = (parseInt(pageNumber)-1) * parseInt(totalLimit);
