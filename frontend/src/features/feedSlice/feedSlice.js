@@ -67,18 +67,17 @@ export const feedSlice = createSlice({
     builder.addCase(getFeed.pending, (state, action) => {
       state.loading = true;
     })
+
     builder.addCase(getFeed.fulfilled, (state, action) => {
       state.loading = false;
       console.log("da length: ",action.payload.posts.length)
       if (action.payload.posts.length) {
-      state.posts = [...state.posts, ...action.payload.posts];
-      // state.posts.push(action.payload.posts);
+      // state.posts = [...state.posts, ...action.payload.posts];
+      state.posts = state.posts.concat(action.payload.posts);
       } else {
         state.hasMorePosts = false;
       }
     });
-
-
 
     builder.addCase(getFeed.rejected, (state, action) => {
       state.errorMessage = action.payload

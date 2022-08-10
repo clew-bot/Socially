@@ -56,10 +56,7 @@ const Dashboard = () => {
 
   return (
     <Grid>
-
-
       {name}
-   
       <FriendsTab>
         <AboutDash name={name}></AboutDash>
         {/* <button onClick={consoleme}><h1>TESTING</h1></button> */}
