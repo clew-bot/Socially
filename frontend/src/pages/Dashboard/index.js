@@ -32,21 +32,20 @@ const Dashboard = () => {
       console.log("Posts from redux: ", feed.posts)
   }
 
-  useEffect(() => {
-    console.log(auth.user)
-    if (!auth.user) {
-      navigate("/login")
-} 
-    const handleLogout = () => {
-      dispatch(logout())
-    }
-    if (auth.errorMessage === "Not logged in") {
+//   useEffect(() => {
+//     if (!auth.user) {
+//       navigate("/login")
+// } 
+//     const handleLogout = () => {
+//       dispatch(logout())
+//     }
+//     if (auth.errorMessage === "Not logged in") {
 
-      console.log("hi")
-      handleLogout();
-    }
+//       console.log("hi")
+//       handleLogout();
+//     }
     
-  }, [auth.errorMessage, auth.user, dispatch, feed.errorMessage, feed.isError, navigate])
+//   }, [auth.errorMessage, auth.user, dispatch, feed.errorMessage, feed.isError, navigate])
 
   useEffect(() => {
 

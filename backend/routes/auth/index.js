@@ -5,7 +5,7 @@ const requireAuth = require("../../middleware/middleware");
 
 router.post("/", authController.signup)
 router.post("/login", authController.login)
-router.get("/check", authController.check)
+router.get("/authCheck", authController.check)
 router.get("/logout", authController.logout)
 
 

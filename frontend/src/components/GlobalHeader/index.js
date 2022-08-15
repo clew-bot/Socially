@@ -7,12 +7,13 @@ import {
 } from "react-icons/ri"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { logout } from "../../features/authSlice/authSlice.js"
+import { logout, authCheck } from "../../features/authSlice/authSlice.js"
 
 const GlobalHeader = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { loggedOut } = useSelector((state) => state.auth)
+
   const user = JSON.parse(localStorage.getItem("yllaicos1")) || null
   const handleLogout = async () => {
     try {
@@ -21,11 +22,13 @@ const GlobalHeader = () => {
       console.log(err)
     }
   }
+
+  const checkLogout = () => {
+    dispatch(authCheck());
+  }
   useEffect(() => {
-    if (loggedOut) {
-      console.log("loggout")
-      navigate("/login")
-    }
+
+    checkLogout();
   }, [loggedOut, navigate])
 
   return (

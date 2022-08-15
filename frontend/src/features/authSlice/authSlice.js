@@ -11,7 +11,6 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     body: JSON.stringify(user),
   })
   const data = await response.json()
-  console.log(data)
   if (data.loggedIn === false) {
     console.log("error", data.message)
     return thunkAPI.rejectWithValue(data.message)
@@ -32,6 +31,23 @@ export const logout = createAsyncThunk(
       console.log(data)
       // alert("you have been logged out!")
       return thunkAPI.fulfillWithValue(data)
+    } catch (err) {
+      console.log(err)
+    }
+  },
+)
+
+export const authCheck = createAsyncThunk(
+  "auth/authCheck",
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch("/api/auth/authCheck")
+      const data = await response.json()
+      if (data.loggedIn === false) {
+        return thunkAPI.rejectWithValue(data.message)
+      } else {
+        return thunkAPI.fulfillWithValue(data)
+      }
     } catch (err) {
       console.log(err)
     }
@@ -61,11 +77,25 @@ export const authSlice = createSlice({
     })
   
     builder.addCase(logout.fulfilled, (state, action) => {
-      console.log("full")
+      
       state.loggedIn = false
       state.loggedOut = true
       state.user = null;
     })
+
+    builder.addCase(authCheck.rejected, (state, action) => {
+      
+      state.loggedIn = false
+      state.loggedOut = true
+      state.user = null;
+    })
+
+    builder.addCase(authCheck.fulfilled, (state, action) => {
+      state.loggedIn = true
+      state.loggedOut = false
+      state.user = action.payload;
+    }
+    )
   }
 })
 
