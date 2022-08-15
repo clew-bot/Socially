@@ -17,19 +17,20 @@ const GlobalHeader = () => {
   const user = JSON.parse(localStorage.getItem("yllaicos1")) || null
   const handleLogout = async () => {
     try {
-      dispatch(logout())
+          dispatch(logout())
+          navigate("/login")
     } catch (err) {
       console.log(err)
     }
   }
 
-  const checkLogout = () => {
-    dispatch(authCheck());
-  }
-  useEffect(() => {
+  // const checkLogout = () => {
+  //   dispatch(authCheck());
+  // }
+  // useEffect(() => {
 
-    checkLogout();
-  }, [loggedOut, navigate])
+  //   checkLogout();
+  // }, [loggedOut, navigate])
 
   return (
     <Header>

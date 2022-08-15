@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { feedSelector } from "../../features/feedSlice/feedSlice.js"
 import { authSelector } from "../../features/authSlice/authSlice.js"
 import { logout } from "../../features/authSlice/authSlice.js"
+import { Button } from "@chakra-ui/react"
 
 
 
@@ -29,23 +30,18 @@ const Dashboard = () => {
   const feed = useSelector(feedSelector);
 
   const consoleme = () => {
-      console.log("Posts from redux: ", feed.posts)
+      // console.log("Posts from redux: ", feed.posts)
+      console.log(name)
   }
 
-//   useEffect(() => {
-//     if (!auth.user) {
-//       navigate("/login")
-// } 
-//     const handleLogout = () => {
-//       dispatch(logout())
-//     }
-//     if (auth.errorMessage === "Not logged in") {
+  useEffect(() => {
+    if (!auth.user) {
+      navigate("/login")
+} else {
+  setName(auth.user.username)
+}
 
-//       console.log("hi")
-//       handleLogout();
-//     }
-    
-//   }, [auth.errorMessage, auth.user, dispatch, feed.errorMessage, feed.isError, navigate])
+  }, [auth.errorMessage, auth.user, dispatch, feed.errorMessage, feed.isError, navigate])
 
   useEffect(() => {
 
@@ -81,11 +77,12 @@ const Dashboard = () => {
       {name}
       <FriendsTab>
         <AboutDash name={name}></AboutDash>
-        {/* <button onClick={consoleme}><h1>TESTING</h1></button> */}
+    
 
       </FriendsTab>
       <NewsTab>
         <div>Yo</div>
+        <Button onClick={consoleme}><h1>TESTING</h1></Button>
       </NewsTab>
       <Displayer>
         <PostStatus />

@@ -61,9 +61,9 @@ export const Container = styled.div`
       0 8px 8px hsl(0deg 0% 0% / 0.075), 0 16px 16px hsl(0deg 0% 0% / 0.075);
     }
 
-    @media screen and (max-width: 600px) {
+    @media screen and (max-width: 768px) {
         .status-bg {
-            width: 95%;
+            min-width: 95% !important;
 
         }
     }

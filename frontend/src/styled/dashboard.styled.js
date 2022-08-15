@@ -17,6 +17,15 @@ grid-template-areas:
   "Friends Displayer Displayer"
   "News Displayer Displayer"
   "News Displayer Displayer";
+
+  @media (max-width: 768px) {
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "Friends"
+      "News"
+      "Displayer";
+  }
   `
 
 export const Displayer = styled.div`
@@ -32,6 +41,9 @@ export const Displayer = styled.div`
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
+  }
+  @media (max-width: 768px) {
+    margin-top: 0px;
   }
 `
 

@@ -13,6 +13,7 @@ export const createPost = createAsyncThunk(
     })
     const data = await response.json()
     console.log(data)
+    return thunkAPI.fulfillWithValue(data)
   },
 )
 
@@ -56,9 +57,7 @@ export const feedSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(createPost.rejected, (state, action) => {
       state.errorMessage = action.payload;
-
-      state.isError = true
-      
+      state.isError = true;
     });
     builder.addCase(createPost.fulfilled, (state, action) => {});
 
@@ -77,7 +76,6 @@ export const feedSlice = createSlice({
     builder.addCase(getFeed.fulfilled, (state, action) => {
       state.errorMessage = null;
       state.loading = false;
-      console.log("da length: ",action.payload.posts.length)
       if (action.payload.posts.length) {
       // state.posts = [...state.posts, ...action.payload.posts];
       state.posts = state.posts.concat(action.payload.posts);
