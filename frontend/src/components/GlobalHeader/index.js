@@ -14,7 +14,6 @@ const GlobalHeader = () => {
   const dispatch = useDispatch()
   const { loggedOut } = useSelector((state) => state.auth)
   const user = JSON.parse(localStorage.getItem("yllaicos1")) || null
-  const [logged, setLogged] = useState(false)
   const handleLogout = async () => {
     try {
       dispatch(logout())
@@ -24,9 +23,10 @@ const GlobalHeader = () => {
   }
   useEffect(() => {
     if (loggedOut) {
+      console.log("loggout")
       navigate("/login")
     }
-  }, [loggedOut])
+  }, [loggedOut, navigate])
 
   return (
     <Header>

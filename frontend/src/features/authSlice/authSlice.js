@@ -30,7 +30,7 @@ export const logout = createAsyncThunk(
       localStorage.removeItem("yllaicos1")
 
       console.log(data)
-      alert("you have been logged out!")
+      // alert("you have been logged out!")
       return thunkAPI.fulfillWithValue(data)
     } catch (err) {
       console.log(err)
@@ -48,24 +48,27 @@ export const authSlice = createSlice({
     loggedOut: false,
   },
   reducers: {},
-  extraReducers: {
-    [login.rejected]: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(login.rejected, (state, action) => {
       state.errorMessage = action.payload
       state.isError = true
-    },
-    [login.fulfilled]: (state, action) => {
+    })
+    builder.addCase(login.fulfilled, (state, action) => {
+      state.errorMessage = null;
       state.loggedIn = true
       state.loggedOut = false
       state.user = action.payload;
-    },
-    //Logouts the user
-    [logout.fulfilled]: (state, action) => {
+    })
+  
+    builder.addCase(logout.fulfilled, (state, action) => {
+      console.log("full")
       state.loggedIn = false
       state.loggedOut = true
       state.user = null;
-    },
-  },
+    })
+  }
 })
+
 
 export const authSelector = (state) => state.auth
 

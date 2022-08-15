@@ -12,7 +12,8 @@ const Profile = () => {
   }, [])
   return (
     <Container>
-      <BackgroundContainer><h1>YO this is the profile page</h1></BackgroundContainer>
+      <BackgroundContainer>
+      </BackgroundContainer>
     </Container>
   )
 }

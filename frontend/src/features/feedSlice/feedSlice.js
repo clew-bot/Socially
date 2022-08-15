@@ -29,10 +29,15 @@ export const getFeed = createAsyncThunk(
         },
       })
       const data = await response.json()
+      
       if (data.isAuth) {
       return data
+      } else {
+        console.log("hi")
+        return thunkAPI.rejectWithValue({ isAuth: false, message: "Not logged in" })
       }
     } catch (error) {
+      console.log("error hit")
       return thunkAPI.rejectWithValue(error)
     }
   }
@@ -50,7 +55,8 @@ export const feedSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(createPost.rejected, (state, action) => {
-      state.errorMessage = action.payload
+      state.errorMessage = action.payload;
+
       state.isError = true
       
     });
@@ -69,6 +75,7 @@ export const feedSlice = createSlice({
     })
 
     builder.addCase(getFeed.fulfilled, (state, action) => {
+      state.errorMessage = null;
       state.loading = false;
       console.log("da length: ",action.payload.posts.length)
       if (action.payload.posts.length) {
@@ -79,9 +86,11 @@ export const feedSlice = createSlice({
       }
     });
 
+
     builder.addCase(getFeed.rejected, (state, action) => {
-      state.errorMessage = action.payload
-      state.isError = true
+      state.isError = true;
+      state.errorMessage = action.payload.message;
+      console.log(state.errorMessage)
     }
     );
   }

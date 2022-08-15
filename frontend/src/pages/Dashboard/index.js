@@ -13,6 +13,7 @@ import AboutDash from "../../components/AboutDash"
 import { useSelector, useDispatch } from "react-redux"
 import { feedSelector } from "../../features/feedSlice/feedSlice.js"
 import { authSelector } from "../../features/authSlice/authSlice.js"
+import { logout } from "../../features/authSlice/authSlice.js"
 
 
 
@@ -32,13 +33,35 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    if (!auth.user) navigate("/login")
+    console.log(auth.user)
+    if (!auth.user) {
+      navigate("/login")
+} 
+    const handleLogout = () => {
+      dispatch(logout())
+    }
+    if (auth.errorMessage === "Not logged in") {
+
+      console.log("hi")
+      handleLogout();
+    }
+    
+  }, [auth.errorMessage, auth.user, dispatch, feed.errorMessage, feed.isError, navigate])
+
+  useEffect(() => {
+
+  
     let currently = lastDiv.current;
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (!feed.loading && feed.hasMorePosts && entry.isIntersecting && entry.intersectionRatio > 0) {
           setPageNumber(pageNumber => pageNumber + 1)
-          dispatch(getFeed(pageNumber))
+          try {
+            dispatch(getFeed(pageNumber))
+          } catch (error) {
+            console.log("Error: ", error)
+          }
+      
         }
       })
     })
